@@ -18,7 +18,7 @@ public class Simunnization {
 
         List<Entity> entities = new ArrayList<Entity>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             Entity ent = new Individual("Entity" + i);
             entities.add(ent);
             network.addVertex(ent);
@@ -26,7 +26,7 @@ public class Simunnization {
 
         entities.get(1).infect(1);
         System.out.println(entities.get(1));
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 999; i++) {
             Connection conn = new StaticConnection();
             network.addEdge(entities.get(i), entities.get(i+1), conn);
         }
@@ -40,6 +40,8 @@ public class Simunnization {
         for (int i = 0; i < 1000; i++) {
             world.tick();
         }
+
+        System.out.println(world.summarize());
 
         logger.info("Shutting down...");
     }
