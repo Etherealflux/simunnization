@@ -33,7 +33,6 @@ public abstract class SIRSpreadable implements Spreadable {
 
     @Override
     public void doTick(Entity host, Collection<Entity> neighbors) {
-        System.out.println(host.getLabel());
         doTickFor(host, host);
         for (Entity target :
                 neighbors) {
@@ -42,11 +41,9 @@ public abstract class SIRSpreadable implements Spreadable {
     }
 
     private void doTickFor(Entity source, Entity target) {
-        System.out.println("Infected: " + source.count(State.INFECTED));
         int infected = roundRandom(source.count(State.INFECTED) * this.infectionRate);
         int recovered = roundRandom(target.count(State.INFECTED) * this.recoveryRate);
 
-        System.out.println(infected);
         target.infect(infected);
         target.recover(recovered);
     }

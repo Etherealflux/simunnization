@@ -1,16 +1,20 @@
 package haus.steven.actors;
 
 import haus.steven.world.State;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * An Individual represents a single actor - a person, a computer, etc.
  */
 public class Individual implements Entity {
+    private static final Logger logger = LogManager.getLogger();
     private final String name;
     private State state;
 
     public Individual(String name) {
         this.name = name;
+        this.state = State.SUSCEPTIBLE;
     }
 
     @Override
@@ -20,22 +24,33 @@ public class Individual implements Entity {
 
     @Override
     public void infect(int count) {
-        if (count > 0) {
-            System.out.println(this.name + " got sick");
-            this.state = State.INFECTED;
+        if (this.state == State.SUSCEPTIBLE){
+            if (count > 0) {
+                logger.info(name + " got infected");
+                this.state = State.INFECTED;
+            }
         }
+
     }
 
     @Override
     public void recover(int count) {
-        if (count > 0) {
-            System.out.println(this.name + " got better");
-            this.state = State.RECOVERED;
+        if (this.state == State.INFECTED) {
+            if (count > 0) {
+                logger.info(name + " got better");
+                this.state = State.RECOVERED;
+            }
         }
+
     }
 
     @Override
     public String getLabel() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " (" + this.state + ")";
     }
 }
