@@ -6,7 +6,7 @@ import haus.steven.world.State;
  * An Individual represents a single actor - a person, a computer, etc.
  */
 public class Individual implements Entity {
-    private String name;
+    private final String name;
     private State state;
 
     public Individual(String name) {

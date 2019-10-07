@@ -10,8 +10,8 @@ import java.util.List;
  * The World contains all of the members of the simulation.
  */
 public class World {
-    private Graph<Entity, Connection> network;
-    private Spreadable spreadable;
+    private final Graph<Entity, Connection> network;
+    private final Spreadable spreadable;
 
     public World(Graph<Entity, Connection> network, Spreadable spreadable) {
         this.network = network;

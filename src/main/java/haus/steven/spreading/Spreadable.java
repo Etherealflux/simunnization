@@ -16,11 +16,11 @@ public interface Spreadable {
      * @param host      The Entity that is infected by this Spreadable
      * @param neighbors All Entities connected to the host
      */
-    public void doTick(Entity host, Collection<Entity> neighbors);
+    void doTick(Entity host, Collection<Entity> neighbors);
 
 
     /**
      * @return The entity's name
      */
-    public String getName();
+    String getName();
 }
