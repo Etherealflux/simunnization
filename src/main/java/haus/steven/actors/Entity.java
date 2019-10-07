@@ -1,6 +1,6 @@
 package haus.steven.actors;
 
-import haus.steven.world.State;
+import haus.steven.spreading.State;
 
 /**
  * An Entity represents a node in the graph.

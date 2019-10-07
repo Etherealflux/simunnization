@@ -1,5 +1,6 @@
 package haus.steven.world;
 import haus.steven.actors.Entity;
+import haus.steven.spreading.State;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import haus.steven.spreading.Spreadable;

@@ -1,6 +1,6 @@
 package haus.steven.actors;
 
-import haus.steven.world.State;
+import haus.steven.spreading.State;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

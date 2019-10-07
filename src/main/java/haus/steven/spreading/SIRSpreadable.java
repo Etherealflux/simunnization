@@ -1,7 +1,6 @@
 package haus.steven.spreading;
 
 import haus.steven.actors.Entity;
-import haus.steven.world.State;
 
 import java.util.Collection;
 

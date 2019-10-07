@@ -1,4 +1,4 @@
-package haus.steven.world;
+package haus.steven.spreading;
 
 /**
  * Actors can be in one of several states - susceptible, recovered, etc
