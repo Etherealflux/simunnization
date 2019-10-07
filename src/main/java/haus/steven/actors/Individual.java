@@ -1,4 +1,6 @@
-package haus.steven.world;
+package haus.steven.actors;
+
+import haus.steven.world.State;
 
 /**
  * An Individual represents a single actor - a person, a computer, etc.

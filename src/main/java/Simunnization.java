@@ -1,8 +1,10 @@
+import haus.steven.actors.Entity;
+import haus.steven.actors.Individual;
 import haus.steven.world.*;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultUndirectedGraph;
-import spreading.Spreadable;
-import spreading.disease.Cold;
+import haus.steven.spreading.Spreadable;
+import haus.steven.spreading.disease.Cold;
 
 import java.util.ArrayList;
 import java.util.List;

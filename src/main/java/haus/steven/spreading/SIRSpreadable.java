@@ -1,6 +1,6 @@
-package spreading;
+package haus.steven.spreading;
 
-import haus.steven.world.Entity;
+import haus.steven.actors.Entity;
 import haus.steven.world.State;
 
 import java.util.Collection;

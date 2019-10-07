@@ -1,6 +1,6 @@
-package spreading.disease;
+package haus.steven.spreading.disease;
 
-import spreading.SIRSpreadable;
+import haus.steven.spreading.SIRSpreadable;
 
 
 /**

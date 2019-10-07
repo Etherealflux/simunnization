@@ -1,10 +1,9 @@
 package haus.steven.world;
+import haus.steven.actors.Entity;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
-import spreading.Spreadable;
+import haus.steven.spreading.Spreadable;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
