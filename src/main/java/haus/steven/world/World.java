@@ -19,6 +19,7 @@ public class World {
     private final Spreadable spreadable;
 
     private ArrayList<EntityTransformer> setupTransformers = new ArrayList<>();
+    private ArrayList<EntityTransformer> tickTransformers = new ArrayList<>();
 
     public World(Graph<Entity, Connection> network, Spreadable spreadable) {
         this.network = network;
@@ -42,16 +43,11 @@ public class World {
      * This picks a random vertex and calls the Spreadable
      */
     public void tick() {
-        // This is going to be slow. Should probably just save a list.
-        Entity[] entities = this.network.vertexSet().toArray(new Entity[0]);
-        Entity picked = entities[(int) (Math.random() * entities.length)];
-
-        List<Entity> neighbors = Graphs.neighborListOf(this.network, picked);
-        this.spreadable.doTick(picked, neighbors);
+        this.spreadable.doTick(network);
     }
 
     public int count(State state) {
-        return this.network.vertexSet().stream().collect(Collectors.summingInt(o -> o.count(state)));
+        return this.network.vertexSet().stream().mapToInt(o -> o.count(state)).sum();
     }
 
     /**
@@ -80,7 +76,8 @@ public class World {
         return result.toString();
     }
 
-    public void AddSetupTransformer(EntityTransformer transformer) {
+    public void RegisterSetupTransformer(EntityTransformer transformer) {
         this.setupTransformers.add(transformer);
     }
+    public void RegisterTickTransformer(EntityTransformer transformer) { this.tickTransformers.add(transformer); }
 }

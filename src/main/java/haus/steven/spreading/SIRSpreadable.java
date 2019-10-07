@@ -1,8 +1,12 @@
 package haus.steven.spreading;
 
 import haus.steven.actors.Entity;
+import haus.steven.world.Connection;
+import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * A SIRSpreadable is any Spreadable that follows the standard SIR model
@@ -31,7 +35,11 @@ public abstract class SIRSpreadable implements Spreadable {
     }
 
     @Override
-    public void doTick(Entity host, Collection<Entity> neighbors) {
+    public void doTick(Graph<Entity, Connection> network) {
+        Entity[] entities = network.vertexSet().toArray(new Entity[0]);
+        Entity host = entities[(int) (Math.random() * entities.length)];
+        List<Entity> neighbors = Graphs.neighborListOf(network, host);
+
         doTickFor(host, host);
         for (Entity target :
                 neighbors) {

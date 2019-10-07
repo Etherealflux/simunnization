@@ -1,5 +1,4 @@
 import haus.steven.actors.Entity;
-import haus.steven.actors.Individual;
 import haus.steven.actors.generators.NumberedIndividualSupplier;
 import haus.steven.world.*;
 import haus.steven.world.generators.StaticConnectionGenerator;
@@ -7,14 +6,11 @@ import haus.steven.world.setup.RandomInfector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
-import org.jgrapht.generate.GraphGenerator;
 import org.jgrapht.generate.ScaleFreeGraphGenerator;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 import haus.steven.spreading.Spreadable;
 import haus.steven.spreading.disease.Cold;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class Simunnization {
@@ -33,7 +29,7 @@ public class Simunnization {
         Spreadable spreadable = new Cold();
 
         World world = new World(network, spreadable);
-        world.AddSetupTransformer(new RandomInfector(0.1));
+        world.RegisterSetupTransformer(new RandomInfector(0.1));
         logger.info("Created world");
 
         world.start();

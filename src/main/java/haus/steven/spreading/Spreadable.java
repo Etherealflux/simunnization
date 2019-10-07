@@ -1,8 +1,9 @@
 package haus.steven.spreading;
 
 import haus.steven.actors.Entity;
+import haus.steven.world.Connection;
+import org.jgrapht.Graph;
 
-import java.util.Collection;
 
 /**
  * A Spreadable has rules for how readily it spreads, as well as how quickly it dissipates.
@@ -11,16 +12,14 @@ import java.util.Collection;
 
 public interface Spreadable {
     /**
-     * Invoked by the world every tick. This should handle both spreading and recovery (if applicable)
+     * Invoked by the world every tick.
      *
-     * @param host      The Entity that is infected by this Spreadable
-     * @param neighbors All Entities connected to the host
      */
-    void doTick(Entity host, Collection<Entity> neighbors);
+    void doTick(Graph<Entity, Connection> network);
 
 
     /**
-     * @return The entity's name
+     * @return The spreadable's name
      */
     String getName();
 }
