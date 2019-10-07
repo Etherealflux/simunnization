@@ -8,7 +8,7 @@ import haus.steven.spreading.SIRSpreadable;
  */
 public class Cold extends SIRSpreadable {
     public Cold() {
-        super(0.1, 0);
+        super(0.1, 0.1);
     }
 
     @Override

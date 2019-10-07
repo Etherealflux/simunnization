@@ -1,42 +1,44 @@
 import haus.steven.actors.Entity;
 import haus.steven.actors.Individual;
+import haus.steven.actors.generators.NumberedIndividualSupplier;
 import haus.steven.world.*;
+import haus.steven.world.generators.StaticConnectionGenerator;
+import haus.steven.world.setup.RandomInfector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
+import org.jgrapht.generate.GraphGenerator;
+import org.jgrapht.generate.ScaleFreeGraphGenerator;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 import haus.steven.spreading.Spreadable;
 import haus.steven.spreading.disease.Cold;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class Simunnization {
     private static final Logger logger = LogManager.getLogger();
+
     public static void main(String[] args) {
-        Graph<Entity, Connection> network = new DefaultUndirectedGraph<>(Connection.class);
+        Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier();
+        Supplier<Connection> edgeSupplier = new StaticConnectionGenerator();
 
-        List<Entity> entities = new ArrayList<Entity>();
+        Graph<Entity, Connection> network = new DefaultUndirectedGraph<Entity, Connection>(vertexSupplier, edgeSupplier, false);
 
-        for (int i = 0; i < 1000; i++) {
-            Entity ent = new Individual("Entity" + i);
-            entities.add(ent);
-            network.addVertex(ent);
-        }
+        ScaleFreeGraphGenerator<Entity, Connection> generator = new ScaleFreeGraphGenerator<Entity, Connection>(1000);
 
-        entities.get(1).infect(1);
-        System.out.println(entities.get(1));
-        for (int i = 0; i < 999; i++) {
-            Connection conn = new StaticConnection();
-            network.addEdge(entities.get(i), entities.get(i+1), conn);
-        }
+        generator.generateGraph(network);
 
         Spreadable spreadable = new Cold();
 
         World world = new World(network, spreadable);
+        world.AddSetupTransformer(new RandomInfector(0.1));
+        logger.info("Created world");
+
+        world.start();
 
         logger.info("Set up world");
-
         for (int i = 0; i < 1000; i++) {
             world.tick();
         }
