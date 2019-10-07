@@ -1,10 +1,13 @@
 package haus.steven.world;
+
 import haus.steven.actors.Entity;
 import haus.steven.spreading.State;
+import haus.steven.world.setup.EntityTransformer;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import haus.steven.spreading.Spreadable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,13 +18,27 @@ public class World {
     private final Graph<Entity, Connection> network;
     private final Spreadable spreadable;
 
+    private ArrayList<EntityTransformer> setupTransformers = new ArrayList<>();
+
     public World(Graph<Entity, Connection> network, Spreadable spreadable) {
         this.network = network;
         this.spreadable = spreadable;
     }
+
+
+    /**
+     * Prepares the world to run. Runs any setup transformers that have been added.
+     */
+    public void start() {
+        for (EntityTransformer transformer :
+                this.setupTransformers) {
+            transformer.transform(this.network);
+        }
+    }
+
     /**
      * Advance the state of the world.
-     *
+     * <p>
      * This picks a random vertex and calls the Spreadable
      */
     public void tick() {
@@ -43,7 +60,7 @@ public class World {
      *
      * @return A summary of the world's state
      */
-    public String summarize(){
+    public String summarize() {
         StringBuilder result = new StringBuilder();
 
         result.append("World summary: \n\n");
@@ -61,5 +78,9 @@ public class World {
 
 
         return result.toString();
+    }
+
+    public void AddSetupTransformer(EntityTransformer transformer) {
+        this.setupTransformers.add(transformer);
     }
 }
