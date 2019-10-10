@@ -40,18 +40,30 @@ public abstract class SIRSpreadable implements Spreadable {
         Entity host = entities[(int) (Math.random() * entities.length)];
         List<Entity> neighbors = Graphs.neighborListOf(network, host);
 
-        doTickFor(host, host);
+        int hostInfected = infectCount(host, host);
+        int hostRecovered = recoverCount(host);
+
         for (Entity target :
                 neighbors) {
-            doTickFor(host, target);
+            target.infect(infectCount(host, target));
         }
+
+        host.infect(hostInfected);
+        host.recover(hostRecovered);
     }
 
-    private void doTickFor(Entity source, Entity target) {
-        int infected = roundRandom(source.count(State.INFECTED) * this.infectionRate);
-        int recovered = roundRandom(target.count(State.INFECTED) * this.recoveryRate);
+    private int infectCount(Entity source, Entity target)
+    {
+        int sourceInfected = source.count(State.INFECTED);
+        int targetSusceptible = target.count(State.SUSCEPTIBLE);
 
-        target.infect(infected);
-        target.recover(recovered);
+        return roundRandom(this.infectionRate * sourceInfected * targetSusceptible);
+    }
+
+    private int recoverCount(Entity source)
+    {
+        int sourceInfected = source.count(State.INFECTED);
+
+        return roundRandom(this.recoveryRate * sourceInfected);
     }
 }
