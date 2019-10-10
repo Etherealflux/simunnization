@@ -60,6 +60,12 @@ public class World {
         return this.network.vertexSet().stream().mapToInt(o -> o.count(state)).sum();
     }
 
+    public void report() {
+        for (WorldLogger logger :
+                loggers) {
+            logger.show();
+        }
+    }
     /**
      * Describes the overall state of the world
      * Includes things like the number of infected people

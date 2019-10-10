@@ -10,4 +10,6 @@ import haus.steven.world.World;
  */
 public interface WorldLogger {
     public void tick(World world, int tick);
+
+    public void show();
 }
