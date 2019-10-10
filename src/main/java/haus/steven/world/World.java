@@ -3,23 +3,24 @@ package haus.steven.world;
 import haus.steven.actors.Entity;
 import haus.steven.spreading.State;
 import haus.steven.world.setup.EntityTransformer;
+import haus.steven.world.statistics.WorldLogger;
 import org.jgrapht.Graph;
-import org.jgrapht.Graphs;
 import haus.steven.spreading.Spreadable;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The World contains all of the members of the simulation.
  */
 public class World {
-    private final Graph<Entity, Connection> network;
-    private final Spreadable spreadable;
+    public final Graph<Entity, Connection> network;
+    public final Spreadable spreadable;
+    private int tickCount = 0;
 
     private ArrayList<EntityTransformer> setupTransformers = new ArrayList<>();
     private ArrayList<EntityTransformer> tickTransformers = new ArrayList<>();
+
+    private ArrayList<WorldLogger> loggers = new ArrayList<>();
 
     public World(Graph<Entity, Connection> network, Spreadable spreadable) {
         this.network = network;
@@ -44,6 +45,15 @@ public class World {
      */
     public void tick() {
         this.spreadable.doTick(network);
+        for (EntityTransformer transformer :
+                tickTransformers) {
+            transformer.transform(network);
+        }
+        for (WorldLogger logger :
+                loggers) {
+            logger.tick(this, tickCount);
+        }
+        this.tickCount += 1;
     }
 
     public int count(State state) {
@@ -80,4 +90,6 @@ public class World {
         this.setupTransformers.add(transformer);
     }
     public void RegisterTickTransformer(EntityTransformer transformer) { this.tickTransformers.add(transformer); }
+
+    public void RegisterLogger(WorldLogger logger) { this.loggers.add(logger); }
 }

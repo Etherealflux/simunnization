@@ -21,7 +21,7 @@ public class Individual implements Entity {
     public Individual(String name) {
         this.name = name;
         this.state = State.SUSCEPTIBLE;
-        labels = new HashSet<String>();
+        labels = new HashSet<>();
     }
 
     @Override
@@ -33,7 +33,6 @@ public class Individual implements Entity {
     public void infect(int count) {
         if (this.state == State.SUSCEPTIBLE){
             if (count > 0) {
-                logger.info(name + " got infected");
                 this.state = State.INFECTED;
             }
         }
@@ -44,7 +43,6 @@ public class Individual implements Entity {
     public void recover(int count) {
         if (this.state == State.INFECTED) {
             if (count > 0) {
-                logger.info(name + " got better");
                 this.state = State.RECOVERED;
             }
         }

@@ -5,7 +5,6 @@ import haus.steven.world.Connection;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -22,8 +21,8 @@ public abstract class SIRSpreadable implements Spreadable {
 
     /**
      * Rounds a positive number to an int, rounding up with probability (1 - (value % 1))
-     * @param value
-     * @return
+     * @param value A number to round
+     * @return A rounded value
      */
     private int roundRandom(double value) {
         double probability = value - Math.floor(value);
