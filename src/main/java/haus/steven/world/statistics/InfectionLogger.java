@@ -9,6 +9,7 @@ import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +53,8 @@ public class InfectionLogger implements WorldLogger {
     public void show() {
 
         double[] tickData = ticks.stream().mapToDouble(Number::doubleValue).toArray();
-        XYChart chart = new XYChartBuilder().width(800).height(600).xAxisTitle("Tick").yAxisTitle("Count").title("Population Counts").build();
+        XYChart chart = new XYChartBuilder().xAxisTitle("Tick").yAxisTitle("Count").title("Population Counts").build();
+        chart.getStyler().setLegendFont(new Font("Helvetica", 0, 24));
         for (State state :
                 State.values()) {
             double[] countData = history.get(state).stream().mapToDouble(Number::doubleValue).toArray();

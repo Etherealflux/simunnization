@@ -24,22 +24,22 @@ public class Simunnization {
 
         Graph<Entity, Connection> network = new DefaultUndirectedGraph<>(vertexSupplier, edgeSupplier, false);
 
-        ScaleFreeGraphGenerator<Entity, Connection> generator = new ScaleFreeGraphGenerator<>(10000);
+        ScaleFreeGraphGenerator<Entity, Connection> generator = new ScaleFreeGraphGenerator<>(1000);
 
         generator.generateGraph(network);
 
         Spreadable spreadable = new Cold();
 
         World world = new World(network, spreadable);
-        world.RegisterSetupTransformer(new RandomInfector(0.01));
+        world.RegisterSetupTransformer(new RandomInfector(0.05));
 
-        world.RegisterLogger(new InfectionLogger(1000));
+        world.RegisterLogger(new InfectionLogger(10));
         logger.info("Created world");
 
         world.start();
 
         logger.info("Set up world");
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 50000; i++) {
             world.tick();
         }
 
