@@ -8,6 +8,7 @@ import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
+import org.knowm.xchart.internal.chartpart.Chart;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,8 +51,8 @@ public class InfectionLogger implements WorldLogger {
     }
 
     @Override
-    public void show() {
-
+    public List<Chart> chart() {
+        List<Chart> charts = new ArrayList<>();
         double[] tickData = ticks.stream().mapToDouble(Number::doubleValue).toArray();
         XYChart chart = new XYChartBuilder().xAxisTitle("Tick").yAxisTitle("Count").title("Population Counts").build();
         chart.getStyler().setLegendFont(new Font("Helvetica", 0, 24));
@@ -61,6 +62,9 @@ public class InfectionLogger implements WorldLogger {
             chart.addSeries(state.toString(), tickData, countData);
 
         }
-        new SwingWrapper(chart).displayChart();
+
+        charts.add(chart);
+
+        return charts;
     }
 }
