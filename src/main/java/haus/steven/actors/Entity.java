@@ -11,9 +11,15 @@ import java.util.Collection;
 public interface Entity {
     int count(State state);
 
-    void infect(int count);
+    void changeState(State state, int count);
 
-    void recover(int count);
+    default void infect(int count) {
+        changeState(State.INFECTED, count);
+    }
+
+    default void recover(int count) {
+        changeState(State.RECOVERED, count);
+    }
 
     String getName();
 

@@ -30,23 +30,9 @@ public class Individual implements Entity {
     }
 
     @Override
-    public void infect(int count) {
-        if (this.state == State.SUSCEPTIBLE) {
-            if (count > 0) {
-                this.state = State.INFECTED;
-            }
-        }
-
-    }
-
-    @Override
-    public void recover(int count) {
-        if (this.state == State.INFECTED) {
-            if (count > 0) {
-                this.state = State.RECOVERED;
-            }
-        }
-
+    public void changeState(State state, int count) {
+        if (count > 0)
+            this.state = state;
     }
 
     @Override
