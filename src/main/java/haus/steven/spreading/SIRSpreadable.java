@@ -21,6 +21,7 @@ public abstract class SIRSpreadable implements Spreadable {
 
     /**
      * Rounds a positive number to an int, rounding up with probability (1 - (value % 1))
+     *
      * @param value A number to round
      * @return A rounded value
      */
@@ -51,16 +52,14 @@ public abstract class SIRSpreadable implements Spreadable {
         host.recover(hostRecovered);
     }
 
-    private int infectCount(Entity source, Entity target)
-    {
+    private int infectCount(Entity source, Entity target) {
         int sourceInfected = source.count(State.INFECTED);
         int targetSusceptible = target.count(State.SUSCEPTIBLE);
 
         return roundRandom(this.infectionRate * sourceInfected * targetSusceptible);
     }
 
-    private int recoverCount(Entity source)
-    {
+    private int recoverCount(Entity source) {
         int sourceInfected = source.count(State.INFECTED);
 
         return roundRandom(this.recoveryRate * sourceInfected);

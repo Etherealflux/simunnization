@@ -9,13 +9,14 @@ import java.util.List;
 /**
  * A WorldLogger is offered the opportunity to collect information about the world
  * every tick. This information is then requested at the end.
- *
+ * <p>
  * I haven't decided yet how to request the information, though! :)
  */
 public interface WorldLogger {
     public void tick(World world, int tick);
 
     public List<Chart> chart();
+
     default void show() {
         List<Chart> charts = chart();
 

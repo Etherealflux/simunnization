@@ -66,6 +66,7 @@ public class World {
             logger.show();
         }
     }
+
     /**
      * Describes the overall state of the world
      * Includes things like the number of infected people
@@ -95,7 +96,12 @@ public class World {
     public void RegisterSetupTransformer(EntityTransformer transformer) {
         this.setupTransformers.add(transformer);
     }
-    public void RegisterTickTransformer(EntityTransformer transformer) { this.tickTransformers.add(transformer); }
 
-    public void RegisterLogger(WorldLogger logger) { this.loggers.add(logger); }
+    public void RegisterTickTransformer(EntityTransformer transformer) {
+        this.tickTransformers.add(transformer);
+    }
+
+    public void RegisterLogger(WorldLogger logger) {
+        this.loggers.add(logger);
+    }
 }

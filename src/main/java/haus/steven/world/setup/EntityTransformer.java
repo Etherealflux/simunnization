@@ -12,6 +12,7 @@ import org.jgrapht.Graph;
 public interface EntityTransformer {
     /**
      * Does something to the entities in the network.
+     *
      * @param network The network to work with
      */
     public void transform(Graph<Entity, Connection> network);

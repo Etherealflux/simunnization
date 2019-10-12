@@ -13,7 +13,6 @@ import org.jgrapht.Graph;
 public interface Spreadable {
     /**
      * Invoked by the world every tick.
-     *
      */
     void doTick(Graph<Entity, Connection> network);
 

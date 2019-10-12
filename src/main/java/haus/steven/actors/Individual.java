@@ -31,7 +31,7 @@ public class Individual implements Entity {
 
     @Override
     public void infect(int count) {
-        if (this.state == State.SUSCEPTIBLE){
+        if (this.state == State.SUSCEPTIBLE) {
             if (count > 0) {
                 this.state = State.INFECTED;
             }
