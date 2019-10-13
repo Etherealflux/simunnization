@@ -8,7 +8,7 @@ import java.util.Collection;
  * An Entity represents a node in the graph.
  * It could be a single person, or a collection of people, or so forth.
  */
-public interface Entity {
+public interface Entity extends Immunizable {
     int count(State state);
 
     void changeState(State state, int count);

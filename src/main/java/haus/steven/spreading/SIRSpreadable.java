@@ -56,12 +56,16 @@ public abstract class SIRSpreadable implements Spreadable {
         int sourceInfected = source.count(State.INFECTED);
         int targetSusceptible = target.count(State.SUSCEPTIBLE);
 
-        return roundRandom(this.infectionRate * sourceInfected * targetSusceptible);
+        return roundRandom(infectionRateFor(source, target) * sourceInfected * targetSusceptible);
     }
 
     private int recoverCount(Entity source) {
         int sourceInfected = source.count(State.INFECTED);
 
         return roundRandom(this.recoveryRate * sourceInfected);
+    }
+
+    private double infectionRateFor(Entity source, Entity target) {
+        return infectionRate * target.susceptibility();
     }
 }

@@ -18,6 +18,8 @@ public class Individual implements Entity {
     private final Set<String> labels;
     private State state;
 
+    private float susceptibility = 1f;
+
     public Individual(String name) {
         this.name = name;
         this.state = State.SUSCEPTIBLE;
@@ -48,5 +50,15 @@ public class Individual implements Entity {
     @Override
     public String toString() {
         return this.name + " (" + this.state + ")";
+    }
+
+    @Override
+    public void immunize(float efficacy) {
+        susceptibility *= (1 - efficacy);
+    }
+
+    @Override
+    public float susceptibility() {
+        return susceptibility;
     }
 }

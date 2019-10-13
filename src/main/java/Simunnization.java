@@ -3,6 +3,7 @@ import haus.steven.actors.generators.NumberedIndividualSupplier;
 import haus.steven.world.*;
 import haus.steven.world.generators.StaticConnectionGenerator;
 import haus.steven.world.setup.HighDegreeInfector;
+import haus.steven.world.setup.RandomImmunizer;
 import haus.steven.world.setup.RandomInfector;
 import haus.steven.world.statistics.InfectionLogger;
 import org.apache.logging.log4j.LogManager;
@@ -31,8 +32,10 @@ public class Simunnization {
         Spreadable spreadable = new Cold();
 
         World world = new World(network, spreadable);
+
         world.RegisterSetupTransformer(new RandomInfector(0.05));
 
+        world.RegisterSetupTransformer(new RandomImmunizer(100, 1, 1000));
         world.RegisterLogger(new InfectionLogger(10));
         logger.info("Created world");
 
