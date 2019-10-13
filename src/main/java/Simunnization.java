@@ -5,6 +5,7 @@ import haus.steven.world.generators.StaticConnectionGenerator;
 import haus.steven.world.setup.HighDegreeInfector;
 import haus.steven.world.setup.RandomImmunizer;
 import haus.steven.world.setup.RandomInfector;
+import haus.steven.world.statistics.ImmunizationLogger;
 import haus.steven.world.statistics.InfectionLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,8 +36,11 @@ public class Simunnization {
 
         world.RegisterSetupTransformer(new RandomInfector(0.05));
 
-        world.RegisterSetupTransformer(new RandomImmunizer(100, 1, 1000));
+        world.RegisterTickTransformer(new RandomImmunizer(1, 1, 1));
+
         world.RegisterLogger(new InfectionLogger(10));
+        world.RegisterLogger(new ImmunizationLogger(10, 0));
+
         logger.info("Created world");
 
         world.start();
