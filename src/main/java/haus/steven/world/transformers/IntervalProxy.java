@@ -1,4 +1,4 @@
-package haus.steven.world.setup;
+package haus.steven.world.transformers;
 
 import haus.steven.world.World;
 

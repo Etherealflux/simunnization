@@ -1,4 +1,4 @@
-package haus.steven.world.setup;
+package haus.steven.world.transformers;
 
 
 import haus.steven.actors.Entity;
@@ -8,7 +8,6 @@ import org.jgrapht.Graph;
 import org.jgrapht.alg.util.VertexDegreeComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 

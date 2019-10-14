@@ -1,9 +1,6 @@
-package haus.steven.world.setup;
+package haus.steven.world.transformers;
 
-import haus.steven.actors.Entity;
-import haus.steven.world.Connection;
 import haus.steven.world.World;
-import org.jgrapht.Graph;
 
 /**
  * Transforms entities in some manner.

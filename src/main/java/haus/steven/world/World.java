@@ -2,7 +2,7 @@ package haus.steven.world;
 
 import haus.steven.actors.Entity;
 import haus.steven.spreading.State;
-import haus.steven.world.setup.EntityTransformer;
+import haus.steven.world.transformers.EntityTransformer;
 import haus.steven.world.statistics.WorldLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
