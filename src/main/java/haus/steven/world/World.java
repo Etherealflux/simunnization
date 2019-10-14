@@ -4,6 +4,8 @@ import haus.steven.actors.Entity;
 import haus.steven.spreading.State;
 import haus.steven.world.setup.EntityTransformer;
 import haus.steven.world.statistics.WorldLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
 import haus.steven.spreading.Spreadable;
 
@@ -13,6 +15,8 @@ import java.util.ArrayList;
  * The World contains all of the members of the simulation.
  */
 public class World {
+    private final Logger logger = LogManager.getLogger();
+
     public final Graph<Entity, Connection> network;
     public final Spreadable spreadable;
     private int tickCount = 0;
@@ -32,9 +36,19 @@ public class World {
      * Prepares the world to run. Runs any setup transformers that have been added.
      */
     public void start() {
+        logger.info("Starting world");
+
         for (EntityTransformer transformer :
                 this.setupTransformers) {
-            transformer.transform(this.network);
+            logger.info("Executing startup transformer: " + transformer);
+            transformer.transform(this);
+        }
+
+        logger.info("Setup transformation complete");
+
+        for (EntityTransformer transformer: tickTransformers)
+        {
+            logger.info("Using tick transformer: " + transformer);
         }
     }
 
@@ -44,10 +58,11 @@ public class World {
      * This picks a random vertex and calls the Spreadable
      */
     public void tick() {
+        logger.trace("Ticking");
         this.spreadable.doTick(network);
         for (EntityTransformer transformer :
                 tickTransformers) {
-            transformer.transform(network);
+            transformer.transform(this);
         }
         for (WorldLogger logger :
                 loggers) {
@@ -103,5 +118,9 @@ public class World {
 
     public void RegisterLogger(WorldLogger logger) {
         this.loggers.add(logger);
+    }
+
+    public int getTick() {
+        return tickCount;
     }
 }

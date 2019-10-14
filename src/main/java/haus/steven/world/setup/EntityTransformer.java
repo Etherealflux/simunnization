@@ -2,6 +2,7 @@ package haus.steven.world.setup;
 
 import haus.steven.actors.Entity;
 import haus.steven.world.Connection;
+import haus.steven.world.World;
 import org.jgrapht.Graph;
 
 /**
@@ -11,9 +12,9 @@ import org.jgrapht.Graph;
  */
 public interface EntityTransformer {
     /**
-     * Does something to the entities in the network.
+     * Does something to the world.
      *
-     * @param network The network to work with
+     * @param world The network to work with
      */
-    public void transform(Graph<Entity, Connection> network);
+    public void transform(World world);
 }

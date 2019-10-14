@@ -3,6 +3,7 @@ import haus.steven.actors.generators.NumberedIndividualSupplier;
 import haus.steven.world.*;
 import haus.steven.world.generators.StaticConnectionGenerator;
 import haus.steven.world.setup.HighDegreeInfector;
+import haus.steven.world.setup.IntervalProxy;
 import haus.steven.world.setup.RandomImmunizer;
 import haus.steven.world.setup.RandomInfector;
 import haus.steven.world.statistics.ImmunizationLogger;
@@ -36,7 +37,7 @@ public class Simunnization {
 
         world.RegisterSetupTransformer(new RandomInfector(0.05));
 
-        world.RegisterTickTransformer(new RandomImmunizer(1, 1, 1));
+        world.RegisterTickTransformer(new IntervalProxy(new RandomImmunizer(1, 1), 100));
 
         world.RegisterLogger(new InfectionLogger(10));
         world.RegisterLogger(new ImmunizationLogger(10, 0));
@@ -46,13 +47,13 @@ public class Simunnization {
         world.start();
 
         logger.info("Set up world");
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i < 500; i++) {
             world.tick();
         }
 
         System.out.println(world.summarize());
 
-        world.report();
+        //world.report();
 
         logger.info("Shutting down...");
     }

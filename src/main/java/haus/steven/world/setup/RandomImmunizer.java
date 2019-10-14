@@ -2,6 +2,7 @@ package haus.steven.world.setup;
 
 import haus.steven.actors.Entity;
 import haus.steven.world.Connection;
+import haus.steven.world.World;
 import org.jgrapht.Graph;
 
 import java.util.ArrayList;
@@ -11,16 +12,14 @@ import java.util.Random;
 /**
  * Randomly chooses and immunizes entities
  */
-public class RandomImmunizer implements TickTransformer {
-    private final int period;
+public class RandomImmunizer implements EntityTransformer {
     private final float efficacy;
     private final int count;
 
     private Random random;
 
-    public RandomImmunizer(int period, float efficacy, int count)
+    public RandomImmunizer(float efficacy, int count)
     {
-        this.period = period;
         this.efficacy = efficacy;
         this.count = count;
 
@@ -28,18 +27,19 @@ public class RandomImmunizer implements TickTransformer {
     }
 
     @Override
-    public void transform(Graph<Entity, Connection> network, int tick) {
-        if (tick % period == 0)
-            transform(network);
-    }
+    public void transform(World world) {
+        Graph<Entity, Connection> network = world.network;
 
-    @Override
-    public void transform(Graph<Entity, Connection> network) {
         List<Entity> entities = new ArrayList<>(network.vertexSet());
 
         for (int i = 0; i < count; i++) {
             int choice = random.nextInt(entities.size());
             entities.get(choice).immunize(efficacy);
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Random immunizer - %.2f efficacy, %d targets", efficacy, count);
     }
 }
