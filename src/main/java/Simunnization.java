@@ -1,5 +1,7 @@
 import haus.steven.actors.Entity;
+import haus.steven.actors.generators.IndividualProvider;
 import haus.steven.actors.generators.NumberedIndividualSupplier;
+import haus.steven.actors.generators.StaticConnectionProvider;
 import haus.steven.world.*;
 import haus.steven.world.generators.StaticConnectionGenerator;
 import haus.steven.world.transformers.IntervalProxy;
@@ -14,7 +16,11 @@ import org.jgrapht.generate.ScaleFreeGraphGenerator;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 import haus.steven.spreading.Spreadable;
 import haus.steven.spreading.disease.Cold;
+import org.jgrapht.io.CSVImporter;
+import org.jgrapht.io.GraphImporter;
+import org.jgrapht.io.ImportException;
 
+import java.io.File;
 import java.util.function.Supplier;
 
 public class Simunnization {
@@ -28,7 +34,16 @@ public class Simunnization {
 
         ScaleFreeGraphGenerator<Entity, Connection> generator = new ScaleFreeGraphGenerator<>(1000);
 
-        generator.generateGraph(network);
+
+        GraphImporter<Entity, Connection> importer = new CSVImporter<Entity, Connection>(new IndividualProvider(), new StaticConnectionProvider());
+
+        try {
+            importer.importGraph(network, new File(System.getenv("GRAPH_LOC")));
+        } catch (ImportException e) {
+            logger.error("Failed to import the graph!");
+            System.exit(-1);
+        }
+
 
         Spreadable spreadable = new Cold();
 
@@ -46,13 +61,13 @@ public class Simunnization {
         world.start();
 
         logger.info("Set up world");
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 50000; i++) {
             world.tick();
         }
 
         System.out.println(world.summarize());
 
-        //world.report();
+        world.report();
 
         logger.info("Shutting down...");
     }
