@@ -22,10 +22,10 @@ public class World {
     public final Spreadable spreadable;
     private int tickCount = 0;
 
-    private ArrayList<Transformer> setupTransformers = new ArrayList<>();
-    private ArrayList<Transformer> tickTransformers = new ArrayList<>();
+    private final ArrayList<Transformer> setupTransformers = new ArrayList<>();
+    private final ArrayList<Transformer> tickTransformers = new ArrayList<>();
 
-    private ArrayList<WorldLogger> loggers = new ArrayList<>();
+    private final ArrayList<WorldLogger> loggers = new ArrayList<>();
 
     public World(Graph<Entity, Connection> network, Spreadable spreadable) {
         this.network = network;

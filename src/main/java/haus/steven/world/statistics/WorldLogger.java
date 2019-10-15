@@ -13,9 +13,9 @@ import java.util.List;
  * I haven't decided yet how to request the information, though! :)
  */
 public interface WorldLogger {
-    public void tick(World world, int tick);
+    void tick(World world, int tick);
 
-    public List<Chart> chart();
+    List<Chart> chart();
 
     default void show() {
         List<Chart> charts = chart();

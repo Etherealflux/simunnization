@@ -35,7 +35,7 @@ public class Simunnization {
         ScaleFreeGraphGenerator<Entity, Connection> generator = new ScaleFreeGraphGenerator<>(1000);
 
 
-        GraphImporter<Entity, Connection> importer = new CSVImporter<Entity, Connection>(new IndividualProvider(), new ToggleConnectionProvider());
+        GraphImporter<Entity, Connection> importer = new CSVImporter<>(new IndividualProvider(), new ToggleConnectionProvider());
 
         try {
             importer.importGraph(network, new File(System.getenv("GRAPH_LOC")));

@@ -13,5 +13,5 @@ public interface Transformer {
      *
      * @param world The network to work with
      */
-    public void transform(World world);
+    void transform(World world);
 }

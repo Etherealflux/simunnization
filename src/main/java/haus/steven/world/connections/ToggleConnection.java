@@ -4,7 +4,7 @@ package haus.steven.world.connections;
  * A ToggleConnection can be switched on and off
  */
 public class ToggleConnection implements Connection {
-    public boolean open = true;
+    private boolean open = true;
 
     @Override
     public double access() {

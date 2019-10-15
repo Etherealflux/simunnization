@@ -16,7 +16,7 @@ public class RandomImmunizer implements Transformer {
     private final float efficacy;
     private final int count;
 
-    private Random random;
+    private final Random random;
 
     public RandomImmunizer(float efficacy, int count)
     {

@@ -1,7 +1,6 @@
 package haus.steven.world.statistics;
 
 import haus.steven.actors.Entity;
-import haus.steven.spreading.State;
 import haus.steven.world.World;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
@@ -19,8 +18,8 @@ public class ImmunizationLogger implements WorldLogger {
     private final int period;
     private final double threshold;
 
-    private List<Integer> ticks = new ArrayList<>();
-    private List<Integer> immune = new ArrayList<>();
+    private final List<Integer> ticks = new ArrayList<>();
+    private final List<Integer> immune = new ArrayList<>();
 
     public ImmunizationLogger(int period, double threshold) {
         this.period = period;
@@ -53,7 +52,7 @@ public class ImmunizationLogger implements WorldLogger {
 
         XYChart chart = new XYChartBuilder().xAxisTitle("Tick").yAxisTitle("Count").title("Population Counts").build();
 
-        chart.getStyler().setLegendFont(new Font("Helvetica", 0, 24));
+        chart.getStyler().setLegendFont(new Font("Helvetica", Font.PLAIN, 24));
         chart.addSeries("Immune", tickData, immuneData);
 
         charts.add(chart);

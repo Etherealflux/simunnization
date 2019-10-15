@@ -11,8 +11,8 @@ import java.util.List;
  * A SIRSpreadable is any Spreadable that follows the standard SIR model
  */
 public abstract class SIRSpreadable implements Spreadable {
-    private double infectionRate;
-    private double recoveryRate;
+    private final double infectionRate;
+    private final double recoveryRate;
 
     public SIRSpreadable(double infectionRate, double recoveryRate) {
         this.infectionRate = infectionRate;
