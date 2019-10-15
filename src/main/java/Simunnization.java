@@ -1,12 +1,11 @@
 import haus.steven.actors.Entity;
-import haus.steven.actors.generators.IndividualProvider;
-import haus.steven.actors.generators.NumberedIndividualSupplier;
-import haus.steven.actors.generators.StaticConnectionProvider;
-import haus.steven.actors.generators.ToggleConnectionProvider;
+import haus.steven.actors.providers.IndividualProvider;
+import haus.steven.actors.suppliers.NumberedIndividualSupplier;
+import haus.steven.world.connections.providers.ToggleConnectionProvider;
 import haus.steven.spreading.State;
 import haus.steven.world.*;
-import haus.steven.world.generators.StaticConnectionGenerator;
-import haus.steven.world.generators.ToggleConnectionGenerator;
+import haus.steven.world.connections.Connection;
+import haus.steven.world.connections.suppliers.ToggleConnectionSupplier;
 import haus.steven.world.transformers.*;
 import haus.steven.world.statistics.ImmunizationLogger;
 import haus.steven.world.statistics.InfectionLogger;
@@ -29,7 +28,7 @@ public class Simunnization {
 
     public static void main(String[] args) {
         Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier();
-        Supplier<Connection> edgeSupplier = new ToggleConnectionGenerator();
+        Supplier<Connection> edgeSupplier = new ToggleConnectionSupplier();
 
         Graph<Entity, Connection> network = new DefaultUndirectedGraph<>(vertexSupplier, edgeSupplier, false);
 

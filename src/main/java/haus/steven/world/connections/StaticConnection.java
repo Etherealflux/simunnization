@@ -1,4 +1,4 @@
-package haus.steven.world;
+package haus.steven.world.connections;
 
 /**
  * A StaticConnection never changes and has no interesting properties

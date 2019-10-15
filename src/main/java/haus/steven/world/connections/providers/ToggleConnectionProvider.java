@@ -1,8 +1,8 @@
-package haus.steven.actors.generators;
+package haus.steven.world.connections.providers;
 
 import haus.steven.actors.Entity;
-import haus.steven.world.Connection;
-import haus.steven.world.ToggleConnection;
+import haus.steven.world.connections.Connection;
+import haus.steven.world.connections.ToggleConnection;
 import org.jgrapht.io.Attribute;
 import org.jgrapht.io.EdgeProvider;
 

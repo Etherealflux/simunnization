@@ -5,10 +5,10 @@ import haus.steven.world.World;
 /**
  * Proxies access to a transformer. This can be used to make transformers conditional.
  */
-public abstract class TransformerProxy implements EntityTransformer {
-    private final EntityTransformer transformer;
+public abstract class TransformerProxy implements Transformer {
+    private final Transformer transformer;
 
-    public TransformerProxy(EntityTransformer transformer) {
+    public TransformerProxy(Transformer transformer) {
         this.transformer = transformer;
     }
 

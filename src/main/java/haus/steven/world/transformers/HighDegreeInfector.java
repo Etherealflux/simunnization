@@ -2,7 +2,7 @@ package haus.steven.world.transformers;
 
 
 import haus.steven.actors.Entity;
-import haus.steven.world.Connection;
+import haus.steven.world.connections.Connection;
 import haus.steven.world.World;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.util.VertexDegreeComparator;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Infects nodes in order of decreasing degree
  */
-public class HighDegreeInfector implements EntityTransformer {
+public class HighDegreeInfector implements Transformer {
 
     private final int count;
 

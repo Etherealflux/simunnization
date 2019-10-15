@@ -1,7 +1,7 @@
 package haus.steven.world.transformers;
 
-import haus.steven.world.Connection;
-import haus.steven.world.ToggleConnection;
+import haus.steven.world.connections.Connection;
+import haus.steven.world.connections.ToggleConnection;
 import haus.steven.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Closes all connections, if possible
  */
-public class QuarantineConnectionTransformer implements EntityTransformer {
+public class QuarantineConnectionTransformer implements Transformer {
     private static final Logger logger = LogManager.getLogger();
 
     private boolean triggered = false;

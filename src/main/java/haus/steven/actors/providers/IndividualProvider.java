@@ -1,4 +1,4 @@
-package haus.steven.actors.generators;
+package haus.steven.actors.providers;
 
 import haus.steven.actors.Entity;
 import haus.steven.actors.Individual;

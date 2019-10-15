@@ -1,7 +1,7 @@
 package haus.steven.world.transformers;
 
 import haus.steven.actors.Entity;
-import haus.steven.world.Connection;
+import haus.steven.world.connections.Connection;
 import haus.steven.world.World;
 import org.jgrapht.Graph;
 
@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * Randomly chooses and immunizes entities
  */
-public class RandomImmunizer implements EntityTransformer {
+public class RandomImmunizer implements Transformer {
     private final float efficacy;
     private final int count;
 

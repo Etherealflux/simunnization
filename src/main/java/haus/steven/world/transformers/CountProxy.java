@@ -12,7 +12,7 @@ public class CountProxy extends TransformerProxy {
     private final State state;
     private final int count;
 
-    public CountProxy(EntityTransformer transformer, State state, int count) {
+    public CountProxy(Transformer transformer, State state, int count) {
         super(transformer);
         this.state = state;
         this.count = count;

@@ -1,4 +1,4 @@
-package haus.steven.world;
+package haus.steven.world.connections;
 
 /**
  * A ToggleConnection can be switched on and off

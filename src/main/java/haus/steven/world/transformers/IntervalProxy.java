@@ -8,7 +8,7 @@ import haus.steven.world.World;
 public class IntervalProxy extends TransformerProxy {
     private final int period;
 
-    public IntervalProxy(EntityTransformer transformer, int period) {
+    public IntervalProxy(Transformer transformer, int period) {
         super(transformer);
         this.period = period;
     }

@@ -2,7 +2,8 @@ package haus.steven.world;
 
 import haus.steven.actors.Entity;
 import haus.steven.spreading.State;
-import haus.steven.world.transformers.EntityTransformer;
+import haus.steven.world.connections.Connection;
+import haus.steven.world.transformers.Transformer;
 import haus.steven.world.statistics.WorldLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,8 +22,8 @@ public class World {
     public final Spreadable spreadable;
     private int tickCount = 0;
 
-    private ArrayList<EntityTransformer> setupTransformers = new ArrayList<>();
-    private ArrayList<EntityTransformer> tickTransformers = new ArrayList<>();
+    private ArrayList<Transformer> setupTransformers = new ArrayList<>();
+    private ArrayList<Transformer> tickTransformers = new ArrayList<>();
 
     private ArrayList<WorldLogger> loggers = new ArrayList<>();
 
@@ -38,7 +39,7 @@ public class World {
     public void start() {
         logger.info("Starting world");
 
-        for (EntityTransformer transformer :
+        for (Transformer transformer :
                 this.setupTransformers) {
             logger.info("Executing startup transformer: " + transformer);
             transformer.transform(this);
@@ -46,7 +47,7 @@ public class World {
 
         logger.info("Setup transformation complete");
 
-        for (EntityTransformer transformer: tickTransformers)
+        for (Transformer transformer: tickTransformers)
         {
             logger.info("Using tick transformer: " + transformer);
         }
@@ -60,7 +61,7 @@ public class World {
     public void tick() {
         logger.trace("Ticking");
         this.spreadable.doTick(network);
-        for (EntityTransformer transformer :
+        for (Transformer transformer :
                 tickTransformers) {
             transformer.transform(this);
         }
@@ -108,11 +109,11 @@ public class World {
         return result.toString();
     }
 
-    public void RegisterSetupTransformer(EntityTransformer transformer) {
+    public void RegisterSetupTransformer(Transformer transformer) {
         this.setupTransformers.add(transformer);
     }
 
-    public void RegisterTickTransformer(EntityTransformer transformer) {
+    public void RegisterTickTransformer(Transformer transformer) {
         this.tickTransformers.add(transformer);
     }
 

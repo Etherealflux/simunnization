@@ -1,11 +1,11 @@
 package haus.steven.world.transformers;
 
 import haus.steven.actors.Entity;
-import haus.steven.world.Connection;
+import haus.steven.world.connections.Connection;
 import haus.steven.world.World;
 import org.jgrapht.Graph;
 
-public class RandomInfector implements EntityTransformer {
+public class RandomInfector implements Transformer {
     private final double probability;
 
     public RandomInfector(double probability) {

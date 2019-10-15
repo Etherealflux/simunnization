@@ -1,7 +1,7 @@
 package haus.steven.spreading;
 
 import haus.steven.actors.Entity;
-import haus.steven.world.Connection;
+import haus.steven.world.connections.Connection;
 import org.jgrapht.Graph;
 
 

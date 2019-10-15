@@ -7,7 +7,7 @@ import haus.steven.world.World;
  * This could be used to infect people at the start,
  * or to immunize people at regular intervals.
  */
-public interface EntityTransformer {
+public interface Transformer {
     /**
      * Does something to the world.
      *
