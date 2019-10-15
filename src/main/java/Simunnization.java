@@ -2,11 +2,12 @@ import haus.steven.actors.Entity;
 import haus.steven.actors.generators.IndividualProvider;
 import haus.steven.actors.generators.NumberedIndividualSupplier;
 import haus.steven.actors.generators.StaticConnectionProvider;
+import haus.steven.actors.generators.ToggleConnectionProvider;
+import haus.steven.spreading.State;
 import haus.steven.world.*;
 import haus.steven.world.generators.StaticConnectionGenerator;
-import haus.steven.world.transformers.IntervalProxy;
-import haus.steven.world.transformers.RandomImmunizer;
-import haus.steven.world.transformers.RandomInfector;
+import haus.steven.world.generators.ToggleConnectionGenerator;
+import haus.steven.world.transformers.*;
 import haus.steven.world.statistics.ImmunizationLogger;
 import haus.steven.world.statistics.InfectionLogger;
 import org.apache.logging.log4j.LogManager;
@@ -28,14 +29,14 @@ public class Simunnization {
 
     public static void main(String[] args) {
         Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier();
-        Supplier<Connection> edgeSupplier = new StaticConnectionGenerator();
+        Supplier<Connection> edgeSupplier = new ToggleConnectionGenerator();
 
         Graph<Entity, Connection> network = new DefaultUndirectedGraph<>(vertexSupplier, edgeSupplier, false);
 
         ScaleFreeGraphGenerator<Entity, Connection> generator = new ScaleFreeGraphGenerator<>(1000);
 
 
-        GraphImporter<Entity, Connection> importer = new CSVImporter<Entity, Connection>(new IndividualProvider(), new StaticConnectionProvider());
+        GraphImporter<Entity, Connection> importer = new CSVImporter<Entity, Connection>(new IndividualProvider(), new ToggleConnectionProvider());
 
         try {
             importer.importGraph(network, new File(System.getenv("GRAPH_LOC")));
@@ -51,7 +52,8 @@ public class Simunnization {
 
         world.RegisterSetupTransformer(new RandomInfector(0.05));
 
-        world.RegisterTickTransformer(new IntervalProxy(new RandomImmunizer(1, 1), 100));
+        // world.RegisterTickTransformer(new IntervalProxy(new RandomImmunizer(1, 1), 100));
+        world.RegisterTickTransformer(new CountProxy(new QuarantineConnectionTransformer(), State.INFECTED, 700));
 
         world.RegisterLogger(new InfectionLogger(10));
         world.RegisterLogger(new ImmunizationLogger(10, 0));

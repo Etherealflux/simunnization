@@ -9,11 +9,13 @@ import haus.steven.world.World;
  */
 public class CountProxy extends TransformerProxy {
 
-    private State state;
-    private int count;
+    private final State state;
+    private final int count;
 
     public CountProxy(EntityTransformer transformer, State state, int count) {
         super(transformer);
+        this.state = state;
+        this.count = count;
     }
 
     @Override

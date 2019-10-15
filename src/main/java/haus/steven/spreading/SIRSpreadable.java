@@ -45,18 +45,26 @@ public abstract class SIRSpreadable implements Spreadable {
 
         for (Entity target :
                 neighbors) {
-            target.infect(infectCount(host, target));
+            Connection conn = network.getEdge(host, target);
+            target.infect(infectCount(host, target, conn));
         }
 
         host.infect(hostInfected);
         host.recover(hostRecovered);
     }
-
     private int infectCount(Entity source, Entity target) {
         int sourceInfected = source.count(State.INFECTED);
         int targetSusceptible = target.count(State.SUSCEPTIBLE);
 
         return roundRandom(infectionRateFor(source, target) * sourceInfected * targetSusceptible);
+    }
+
+
+    private int infectCount(Entity source, Entity target, Connection conn) {
+        int sourceInfected = source.count(State.INFECTED);
+        int targetSusceptible = target.count(State.SUSCEPTIBLE);
+
+        return roundRandom(infectionRateFor(source, target, conn) * sourceInfected * targetSusceptible);
     }
 
     private int recoverCount(Entity source) {
@@ -67,5 +75,9 @@ public abstract class SIRSpreadable implements Spreadable {
 
     private double infectionRateFor(Entity source, Entity target) {
         return infectionRate * target.susceptibility();
+    }
+
+    private double infectionRateFor(Entity source, Entity target, Connection conn) {
+        return infectionRateFor(source, target) * conn.access();
     }
 }
