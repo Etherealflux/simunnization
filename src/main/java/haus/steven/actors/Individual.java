@@ -32,6 +32,11 @@ public class Individual implements Entity {
     }
 
     @Override
+    public int population() {
+        return 1;
+    }
+
+    @Override
     public void changeState(State state, int count) {
         if (count > 0)
             this.state = state;

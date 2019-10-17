@@ -11,6 +11,8 @@ import java.util.Collection;
 public interface Entity extends Immunizable {
     int count(State state);
 
+    int population();
+
     void changeState(State state, int count);
 
     default void infect(int count) {
@@ -18,7 +20,7 @@ public interface Entity extends Immunizable {
     }
 
     default void recover(int count) {
-        changeState(State.RECOVERED, count);
+        changeState(State.SUSCEPTIBLE, count);
     }
 
     String getName();
