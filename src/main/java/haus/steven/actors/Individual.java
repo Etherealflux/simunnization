@@ -54,7 +54,7 @@ public class Individual implements Entity {
 
     @Override
     public String toString() {
-        return this.name + " (" + this.state + ")";
+        return this.state.toString();
     }
 
     @Override

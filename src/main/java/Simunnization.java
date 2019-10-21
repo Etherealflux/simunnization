@@ -13,6 +13,6 @@ public class Simunnization {
 
     public static void main(String[] args) {
         Map<String, String> expArgs = new HashMap<>();
-        new ThresholdExperiment().run(expArgs);
+        new VisualizationTest().run(expArgs);
     }
 }

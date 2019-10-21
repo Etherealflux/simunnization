@@ -18,4 +18,8 @@ public class ToggleConnection implements Connection {
     public void close() {
         open = false;
     }
+
+    public String toString() {
+        return open ? "(open)" : "(closed)";
+    }
 }

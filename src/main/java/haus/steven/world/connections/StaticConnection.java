@@ -8,4 +8,8 @@ public class StaticConnection implements Connection {
     public double access() {
         return 1;
     }
+
+    public String toString() {
+        return "";
+    }
 }
