@@ -1,5 +1,7 @@
 package haus.steven.experiments;
 
+import com.github.ajalt.colormath.LAB;
+import com.github.ajalt.colormath.RGB;
 import com.mxgraph.view.mxGraph;
 import haus.steven.actors.Entity;
 import haus.steven.actors.suppliers.NumberedIndividualSupplier;
@@ -38,7 +40,7 @@ public class VisualizationTest implements Experiment {
 
         generator.generateGraph(network);
 
-        Spreadable spreadable = new SIRSpreadable(0.3, 0.0) {
+        Spreadable spreadable = new SIRSpreadable(0.3, 0.2) {
 
             @Override
             public String getName() {
