@@ -29,9 +29,14 @@ public class NetworkViewer extends JFrame {
 
     private final List<LAB> colors = new ArrayList<>(Arrays.asList(susceptibleColor, infectedColor, recoveredColor));
 
+    private final mxGraph graph;
+    private final mxGraphComponent graphComponent;
+
     public NetworkViewer(mxGraph graph)
     {
         super("Network view");
+        this.graph = graph;
+
 
         Object parent = graph.getDefaultParent();
 
@@ -73,7 +78,7 @@ public class NetworkViewer extends JFrame {
         mxIGraphLayout layout = new mxFastOrganicLayout(graph);
         layout.execute(graph.getDefaultParent());
 
-        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        graphComponent = new mxGraphComponent(graph);
         graphComponent.refresh();
         getContentPane().add(graphComponent);
     }
@@ -97,5 +102,42 @@ public class NetworkViewer extends JFrame {
         L /= sum;
 
         return new LAB(L, A, B);
+    }
+
+    public void update() {
+        graph.getModel().beginUpdate();
+
+        try {
+            graph.clearSelection();
+            graph.selectAll();
+
+            Object[] cells = graph.getSelectionCells();
+
+            for (Object c: cells) {
+                mxCell cell = (mxCell) c;
+
+                mxGeometry geometry = cell.getGeometry();
+
+                if (cell.isVertex()) {
+                    Entity entity = (Entity) cell.getValue();
+                    geometry.setHeight(20);
+                    geometry.setWidth(20);
+
+                    double sC = entity.count(State.SUSCEPTIBLE);
+                    double iC = entity.count(State.INFECTED);
+                    double rC = entity.count(State.RECOVERED);
+
+                    List<Double> coefficients = new ArrayList<>(Arrays.asList(sC, iC, rC));
+
+                    RGB color = mixColors(colors, coefficients).toRGB();
+
+                    cell.setStyle("defaultVertex;fillColor=" + color.toHex(true));
+                }
+            }
+        } finally {
+            graph.getModel().endUpdate();
+        }
+
+        graph.refresh();
     }
 }
