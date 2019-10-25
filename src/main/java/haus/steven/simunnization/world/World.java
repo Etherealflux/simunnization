@@ -60,7 +60,7 @@ public class World {
      */
     public void tick() {
         logger.trace("Ticking");
-        this.spreadable.doTick(network);
+        this.spreadable.doTick(this);
         for (Transformer transformer :
                 tickTransformers) {
             transformer.transform(this);

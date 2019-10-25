@@ -4,6 +4,7 @@ import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.actors.suppliers.NumberedIndividualSupplier;
 import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.spreading.ThresholdSpreadable;
+import haus.steven.simunnization.spreading.selectors.RandomEntitySelector;
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import haus.steven.simunnization.world.connections.suppliers.ToggleConnectionSupplier;
@@ -32,7 +33,7 @@ public class ThresholdExperiment implements Experiment {
 
         generator.generateGraph(network);
 
-        Spreadable spreadable = new ThresholdSpreadable(0.5, 0.05);
+        Spreadable spreadable = new ThresholdSpreadable(0.5, 0.05, new RandomEntitySelector(1));
 
         World world = new World(network, spreadable);
 

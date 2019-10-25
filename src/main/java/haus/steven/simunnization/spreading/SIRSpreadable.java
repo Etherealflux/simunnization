@@ -1,6 +1,8 @@
 package haus.steven.simunnization.spreading;
 
 import haus.steven.simunnization.actors.Entity;
+import haus.steven.simunnization.spreading.selectors.EntitySelector;
+import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
@@ -10,13 +12,15 @@ import java.util.List;
 /**
  * A SIRSpreadable is any Spreadable that follows the standard SIR model
  */
-public abstract class SIRSpreadable implements Spreadable {
+public class SIRSpreadable implements Spreadable {
     private final double infectionRate;
     private final double recoveryRate;
+    private final EntitySelector selector;
 
-    public SIRSpreadable(double infectionRate, double recoveryRate) {
+    public SIRSpreadable(double infectionRate, double recoveryRate, EntitySelector selector) {
         this.infectionRate = infectionRate;
         this.recoveryRate = recoveryRate;
+        this.selector = selector;
     }
 
     /**
@@ -35,9 +39,13 @@ public abstract class SIRSpreadable implements Spreadable {
     }
 
     @Override
-    public void doTick(Graph<Entity, Connection> network) {
-        Entity[] entities = network.vertexSet().toArray(new Entity[0]);
-        Entity host = entities[(int) (Math.random() * entities.length)];
+    public void doTick(World world) {
+        for (Entity host : selector.select(world)) {
+            doTickFor(world.network, host);
+        }
+    }
+
+    public void doTickFor(Graph<Entity, Connection> network, Entity host) {
         List<Entity> neighbors = Graphs.neighborListOf(network, host);
 
         int hostInfected = infectCount(host, host);
@@ -79,5 +87,9 @@ public abstract class SIRSpreadable implements Spreadable {
 
     private double infectionRateFor(Entity source, Entity target, Connection conn) {
         return infectionRateFor(source, target) * conn.access();
+    }
+
+    public String toString() {
+        return String.format("SIR spreadable - inf. rate %f.2d - rec. rate %f.2d", infectionRate, recoveryRate);
     }
 }

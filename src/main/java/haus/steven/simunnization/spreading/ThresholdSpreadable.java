@@ -1,6 +1,8 @@
 package haus.steven.simunnization.spreading;
 
 import haus.steven.simunnization.actors.Entity;
+import haus.steven.simunnization.spreading.selectors.EntitySelector;
+import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
@@ -10,10 +12,12 @@ import java.util.List;
 public class ThresholdSpreadable implements Spreadable {
     private final double infectThreshold;
     private final double recoverChance;
+    private final EntitySelector selector;
 
-    public ThresholdSpreadable(double infectThreshold, double recoverChance) {
+    public ThresholdSpreadable(double infectThreshold, double recoverChance, EntitySelector selector) {
         this.infectThreshold = infectThreshold;
         this.recoverChance = recoverChance;
+        this.selector = selector;
     }
 
     /**
@@ -31,10 +35,15 @@ public class ThresholdSpreadable implements Spreadable {
         }
     }
 
+
     @Override
-    public void doTick(Graph<Entity, Connection> network) {
-        Entity[] entities = network.vertexSet().toArray(new Entity[0]);
-        Entity host = entities[(int) (Math.random() * entities.length)];
+    public void doTick(World world) {
+        for (Entity host : selector.select(world)) {
+            doTickFor(world.network, host);
+        }
+    }
+
+    public void doTickFor(Graph<Entity, Connection> network, Entity host) {
         List<Entity> neighbors = Graphs.neighborListOf(network, host);
 
         int totalPop = 0;

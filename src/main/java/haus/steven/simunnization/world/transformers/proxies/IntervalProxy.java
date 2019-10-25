@@ -1,6 +1,7 @@
-package haus.steven.simunnization.world.transformers;
+package haus.steven.simunnization.world.transformers.proxies;
 
 import haus.steven.simunnization.world.World;
+import haus.steven.simunnization.world.transformers.Transformer;
 
 /**
  * Invokes the transformer once every

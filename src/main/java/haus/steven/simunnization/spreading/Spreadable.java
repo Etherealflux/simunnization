@@ -1,8 +1,6 @@
 package haus.steven.simunnization.spreading;
 
-import haus.steven.simunnization.actors.Entity;
-import haus.steven.simunnization.world.connections.Connection;
-import org.jgrapht.Graph;
+import haus.steven.simunnization.world.World;
 
 
 /**
@@ -13,12 +11,7 @@ import org.jgrapht.Graph;
 public interface Spreadable {
     /**
      * Invoked by the world every tick.
+     * @param world
      */
-    void doTick(Graph<Entity, Connection> network);
-
-
-    /**
-     * @return The spreadable's name
-     */
-    String getName();
+    void doTick(World world);
 }

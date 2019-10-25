@@ -20,6 +20,7 @@ public class RandomImmunizer implements Transformer {
 
     public RandomImmunizer(float efficacy, int count)
     {
+        this.notify();
         this.efficacy = efficacy;
         this.count = count;
 
