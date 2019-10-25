@@ -9,7 +9,7 @@ import org.jgrapht.Graphs;
 
 import java.util.List;
 
-public class ThresholdSpreadable implements Spreadable {
+public class ThresholdSpreadable extends Spreadable {
     private final double infectThreshold;
     private final double recoverChance;
     private final EntitySelector selector;

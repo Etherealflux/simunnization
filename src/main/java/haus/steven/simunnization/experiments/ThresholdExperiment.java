@@ -36,8 +36,7 @@ public class ThresholdExperiment implements Experiment {
 
         generator.generateGraph(network);
 
-
-        World world = new World(network, spreadable);
+        World world = new World(network, Arrays.asList(spreadable));
 
         world.RegisterSetupTransformer(new RandomInfector(spreadable, 0.5));
 

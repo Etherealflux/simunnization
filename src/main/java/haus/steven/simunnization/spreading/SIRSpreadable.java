@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * A SIRSpreadable is any Spreadable that follows the standard SIR model
  */
-public class SIRSpreadable implements Spreadable {
+public class SIRSpreadable extends Spreadable {
     private final double infectionRate;
     private final double recoveryRate;
     private final EntitySelector selector;

@@ -1,9 +1,11 @@
 package haus.steven.simunnization.experiments;
 
+import com.github.ajalt.colormath.RGB;
 import com.mxgraph.view.mxGraph;
 import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.actors.suppliers.NumberedIndividualSupplier;
 import haus.steven.simunnization.spreading.Spreadable;
+import haus.steven.simunnization.spreading.State;
 import haus.steven.simunnization.spreading.ThresholdSpreadable;
 import haus.steven.simunnization.spreading.selectors.RandomEntitySelector;
 import haus.steven.simunnization.world.World;
@@ -19,7 +21,9 @@ import org.jgrapht.generate.ScaleFreeGraphGenerator;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -29,9 +33,19 @@ public class VisualizationTest implements Experiment {
 
     @Override
     public void run(Map<String, String> args) {
-        Spreadable spreadable = new ThresholdSpreadable(0.4f, 0.2f, new RandomEntitySelector(1));
+        Spreadable spreadableA = new ThresholdSpreadable(0.4f, 0.2f, new RandomEntitySelector(1));
+        Spreadable spreadableB = new ThresholdSpreadable(0.4f, 0.2f, new RandomEntitySelector(1));
 
-        Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier(Arrays.asList(spreadable));
+        spreadableA.setColor(State.SUSCEPTIBLE, new RGB(250, 250, 250));
+        spreadableB.setColor(State.SUSCEPTIBLE, new RGB(250, 250, 250));
+        spreadableA.setColor(State.INFECTED, new RGB(255, 0, 0));
+        spreadableB.setColor(State.INFECTED, new RGB(0, 0, 255));
+        spreadableA.setColor(State.RECOVERED, new RGB(0, 0, 0));
+        spreadableB.setColor(State.RECOVERED, new RGB(0, 0, 0));
+
+        List<Spreadable> spreadables = new ArrayList<>(Arrays.asList(spreadableA, spreadableB));
+
+        Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier(spreadables);
         Supplier<Connection> edgeSupplier = new ToggleConnectionSupplier();
 
         Graph<Entity, Connection> network = new DefaultUndirectedGraph<>(vertexSupplier, edgeSupplier, false);
@@ -40,9 +54,10 @@ public class VisualizationTest implements Experiment {
 
         generator.generateGraph(network);
 
-        World world = new World(network, spreadable);
+        World world = new World(network, spreadables);
 
-        world.RegisterSetupTransformer(new RandomInfector(spreadable, 0.3));
+        world.RegisterSetupTransformer(new RandomInfector(spreadableA, 0.3));
+        world.RegisterSetupTransformer(new RandomInfector(spreadableB, 0.3));
 
         logger.info("Created world");
 

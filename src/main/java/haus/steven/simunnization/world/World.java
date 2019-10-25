@@ -11,22 +11,23 @@ import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * The World contains all of the members of the simulation.
  */
 public class World {
     public final Graph<Entity, Connection> network;
-    public final Spreadable spreadable;
+    public final Collection<Spreadable> spreadables;
     private final Logger logger = LogManager.getLogger();
     private final ArrayList<Transformer> setupTransformers = new ArrayList<>();
     private final ArrayList<Transformer> tickTransformers = new ArrayList<>();
     private final ArrayList<WorldLogger> loggers = new ArrayList<>();
     private int tickCount = 0;
 
-    public World(Graph<Entity, Connection> network, Spreadable spreadable) {
+    public World(Graph<Entity, Connection> network, Collection<Spreadable> spreadables) {
         this.network = network;
-        this.spreadable = spreadable;
+        this.spreadables = spreadables;
     }
 
 
@@ -56,7 +57,11 @@ public class World {
      */
     public void tick() {
         logger.trace("Ticking");
-        this.spreadable.doTick(this);
+
+        for (Spreadable spreadable : spreadables) {
+            spreadable.doTick(this);
+        }
+
         for (Transformer transformer :
                 tickTransformers) {
             transformer.transform(this);

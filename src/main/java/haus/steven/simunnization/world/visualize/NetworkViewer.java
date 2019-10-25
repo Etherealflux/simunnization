@@ -116,6 +116,8 @@ public class NetworkViewer extends JFrame {
         B /= sum;
         L /= sum;
 
+        L = Math.max(Math.min(L, 100.0), 0.0);
+
         return new LAB(L, A, B);
     }
 
