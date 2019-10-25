@@ -81,4 +81,6 @@ public interface Entity extends Immunizable {
     String getName();
 
     Collection<String> getLabels();
+
+    Collection<Spreadable> getSpreadables();
 }

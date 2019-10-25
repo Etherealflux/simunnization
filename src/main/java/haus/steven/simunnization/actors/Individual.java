@@ -69,6 +69,11 @@ public class Individual implements Entity {
     }
 
     @Override
+    public Collection<Spreadable> getSpreadables() {
+        return states.keySet();
+    }
+
+    @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
 
