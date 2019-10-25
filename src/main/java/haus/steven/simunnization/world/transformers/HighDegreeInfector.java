@@ -15,7 +15,6 @@ import java.util.List;
  * Infects nodes in order of decreasing degree
  */
 public class HighDegreeInfector implements Transformer {
-
     private final int count;
 
     public HighDegreeInfector(int count) {
