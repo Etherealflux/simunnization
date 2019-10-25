@@ -35,7 +35,7 @@ public class CyclicEntitySelector implements EntitySelector {
         Set<Entity> result = new HashSet<>();
 
         for (int i = 0; i < count; i++) {
-            result.add(entities.get(0));
+            result.add(entities.get(i));
             index += 1;
 
 
