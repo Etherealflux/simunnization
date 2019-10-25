@@ -10,10 +10,9 @@ import java.util.*;
  */
 public class CyclicEntitySelector implements EntitySelector {
 
+    private final int count;
     private List<Entity> entities;
     private int size;
-    private final int count;
-
     private int index = 0;
 
 

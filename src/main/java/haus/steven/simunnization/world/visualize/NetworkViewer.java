@@ -31,8 +31,7 @@ public class NetworkViewer extends JFrame {
     private final mxGraph graph;
     private final mxGraphComponent graphComponent;
 
-    public NetworkViewer(mxGraph graph)
-    {
+    public NetworkViewer(mxGraph graph) {
         super("Network view");
         this.graph = graph;
 
@@ -49,7 +48,7 @@ public class NetworkViewer extends JFrame {
 
             Object[] cells = graph.getSelectionCells();
 
-            for (Object c: cells) {
+            for (Object c : cells) {
                 mxCell cell = (mxCell) c;
 
                 mxGeometry geometry = cell.getGeometry();
@@ -87,7 +86,7 @@ public class NetworkViewer extends JFrame {
         double B = 0;
         double L = 0;
 
-        double sum = 0 ;
+        double sum = 0;
 
         for (int i = 0; i < colors.size(); i++) {
             A += colors.get(i).getA() * coefficients.get(i);
@@ -112,7 +111,7 @@ public class NetworkViewer extends JFrame {
 
             Object[] cells = graph.getSelectionCells();
 
-            for (Object c: cells) {
+            for (Object c : cells) {
                 mxCell cell = (mxCell) c;
 
                 mxGeometry geometry = cell.getGeometry();

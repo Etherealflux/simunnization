@@ -60,6 +60,7 @@ public class SIRSpreadable implements Spreadable {
         host.infect(hostInfected);
         host.recover(hostRecovered);
     }
+
     private int infectCount(Entity source, Entity target) {
         int sourceInfected = source.count(State.INFECTED);
         int targetSusceptible = target.count(State.SUSCEPTIBLE);

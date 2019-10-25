@@ -2,7 +2,6 @@ package haus.steven.simunnization.spreading.selectors;
 
 import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.world.World;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 
 import java.util.*;
 

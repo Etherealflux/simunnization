@@ -1,14 +1,14 @@
 package haus.steven.simunnization.world;
 
 import haus.steven.simunnization.actors.Entity;
+import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.spreading.State;
 import haus.steven.simunnization.world.connections.Connection;
-import haus.steven.simunnization.world.transformers.Transformer;
 import haus.steven.simunnization.world.statistics.WorldLogger;
+import haus.steven.simunnization.world.transformers.Transformer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;
-import haus.steven.simunnization.spreading.Spreadable;
 
 import java.util.ArrayList;
 
@@ -16,16 +16,13 @@ import java.util.ArrayList;
  * The World contains all of the members of the simulation.
  */
 public class World {
-    private final Logger logger = LogManager.getLogger();
-
     public final Graph<Entity, Connection> network;
     public final Spreadable spreadable;
-    private int tickCount = 0;
-
+    private final Logger logger = LogManager.getLogger();
     private final ArrayList<Transformer> setupTransformers = new ArrayList<>();
     private final ArrayList<Transformer> tickTransformers = new ArrayList<>();
-
     private final ArrayList<WorldLogger> loggers = new ArrayList<>();
+    private int tickCount = 0;
 
     public World(Graph<Entity, Connection> network, Spreadable spreadable) {
         this.network = network;
@@ -47,8 +44,7 @@ public class World {
 
         logger.info("Setup transformation complete");
 
-        for (Transformer transformer: tickTransformers)
-        {
+        for (Transformer transformer : tickTransformers) {
             logger.info("Using tick transformer: " + transformer);
         }
     }

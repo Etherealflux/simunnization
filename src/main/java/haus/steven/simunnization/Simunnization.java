@@ -1,7 +1,6 @@
 package haus.steven.simunnization;
 
-import haus.steven.simunnization.experiments.*;
-
+import haus.steven.simunnization.experiments.VisualizationTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

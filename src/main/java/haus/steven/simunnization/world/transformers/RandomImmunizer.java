@@ -1,8 +1,8 @@
 package haus.steven.simunnization.world.transformers;
 
 import haus.steven.simunnization.actors.Entity;
-import haus.steven.simunnization.world.connections.Connection;
 import haus.steven.simunnization.world.World;
+import haus.steven.simunnization.world.connections.Connection;
 import org.jgrapht.Graph;
 
 import java.util.ArrayList;
@@ -18,8 +18,7 @@ public class RandomImmunizer implements Transformer {
 
     private final Random random;
 
-    public RandomImmunizer(float efficacy, int count)
-    {
+    public RandomImmunizer(float efficacy, int count) {
         this.notify();
         this.efficacy = efficacy;
         this.count = count;

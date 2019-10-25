@@ -11,6 +11,7 @@ import haus.steven.simunnization.world.World;
 public interface Spreadable {
     /**
      * Invoked by the world every tick.
+     *
      * @param world
      */
     void doTick(World world);

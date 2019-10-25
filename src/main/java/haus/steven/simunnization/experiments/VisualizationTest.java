@@ -59,9 +59,10 @@ public class VisualizationTest implements Experiment {
         for (int i = 0; i < 100; i++) {
             world.tick();
             if (i % 10 == 0) {
-                viewer.update(); try {
+                viewer.update();
+                try {
                     TimeUnit.MILLISECONDS.sleep(1000);
-                } catch (InterruptedException e){
+                } catch (InterruptedException e) {
 
                 }
             }
