@@ -16,6 +16,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.generate.ScaleFreeGraphGenerator;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -24,7 +25,9 @@ public class ThresholdExperiment implements Experiment {
 
     @Override
     public void run(Map<String, String> args) {
-        Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier();
+        Spreadable spreadable = new ThresholdSpreadable(0.5, 0.05, new RandomEntitySelector(1));
+
+        Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier(Arrays.asList(spreadable));
         Supplier<Connection> edgeSupplier = new ToggleConnectionSupplier();
 
         Graph<Entity, Connection> network = new DefaultUndirectedGraph<>(vertexSupplier, edgeSupplier, false);
@@ -33,11 +36,10 @@ public class ThresholdExperiment implements Experiment {
 
         generator.generateGraph(network);
 
-        Spreadable spreadable = new ThresholdSpreadable(0.5, 0.05, new RandomEntitySelector(1));
 
         World world = new World(network, spreadable);
 
-        world.RegisterSetupTransformer(new RandomInfector(0.5));
+        world.RegisterSetupTransformer(new RandomInfector(spreadable, 0.5));
 
         world.RegisterLogger(new InfectionLogger(100));
 

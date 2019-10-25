@@ -1,5 +1,6 @@
 package haus.steven.simunnization.spreading;
 
+import com.github.ajalt.colormath.ConvertibleColor;
 import haus.steven.simunnization.world.World;
 
 

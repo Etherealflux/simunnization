@@ -1,13 +1,11 @@
 package haus.steven.simunnization.actors;
 
+import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.spreading.State;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * An Individual represents a single actor - a person, a computer, etc.
@@ -16,19 +14,30 @@ public class Individual implements Entity {
     private static final Logger logger = LogManager.getLogger();
     private final String name;
     private final Set<String> labels;
-    private State state;
+
+    private Map<Spreadable, State> states;
 
     private float susceptibility = 1f;
 
-    public Individual(String name) {
+    public Individual(Collection<Spreadable> spreadables, String name) {
         this.name = name;
-        this.state = State.SUSCEPTIBLE;
+        this.states = new HashMap<>();
+
+        for (Spreadable spreadable: spreadables) {
+            states.put(spreadable, State.SUSCEPTIBLE);
+        }
         labels = new HashSet<>();
     }
 
     @Override
     public int count(State state) {
-        return this.state == state ? 1 : 0;
+        // if we have more than INT_MAX spreadables, I quit
+        return (int) states.values().stream().filter(o -> o == state).count();
+    }
+
+    @Override
+    public int count(State state, Spreadable spreadable) {
+        return state == states.get(spreadable) ? 1 : 0;
     }
 
     @Override
@@ -37,9 +46,16 @@ public class Individual implements Entity {
     }
 
     @Override
-    public void changeState(State state, int count) {
-        if (count > 0)
-            this.state = state;
+    public void changeState(Spreadable spreadable, State from, State to, int count) {
+        if (!states.containsKey(spreadable)) {
+            return;
+        }
+
+        State current = states.get(spreadable);
+
+        if (current == from) {
+            states.put(spreadable, to);
+        }
     }
 
     @Override
@@ -54,7 +70,17 @@ public class Individual implements Entity {
 
     @Override
     public String toString() {
-        return this.state.toString();
+        StringBuilder result = new StringBuilder();
+
+        if (states.size() == 0) {
+            return "Untouched";
+        } else {
+            for (Spreadable spreadable : states.keySet()) {
+                result.append(spreadable + ": " + states.get(spreadable) + " - ");
+            }
+
+            return result.toString();
+        }
     }
 
     @Override

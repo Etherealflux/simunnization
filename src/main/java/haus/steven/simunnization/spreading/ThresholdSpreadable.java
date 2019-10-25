@@ -57,11 +57,11 @@ public class ThresholdSpreadable implements Spreadable {
         }
 
         if (((double) infectedPop) / totalPop > infectThreshold) {
-            host.infect(host.count(State.SUSCEPTIBLE));
+            host.infect(this, host.count(State.SUSCEPTIBLE, this));
         }
 
         if (Math.random() < recoverChance) {
-            host.recover(host.population());
+            host.recover(this, host.population());
         }
     }
 

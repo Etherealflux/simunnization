@@ -19,6 +19,7 @@ import org.jgrapht.generate.ScaleFreeGraphGenerator;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 
 import javax.swing.*;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -28,7 +29,9 @@ public class VisualizationTest implements Experiment {
 
     @Override
     public void run(Map<String, String> args) {
-        Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier();
+        Spreadable spreadable = new ThresholdSpreadable(0.4f, 0.2f, new RandomEntitySelector(1));
+
+        Supplier<Entity> vertexSupplier = new NumberedIndividualSupplier(Arrays.asList(spreadable));
         Supplier<Connection> edgeSupplier = new ToggleConnectionSupplier();
 
         Graph<Entity, Connection> network = new DefaultUndirectedGraph<>(vertexSupplier, edgeSupplier, false);
@@ -37,10 +40,9 @@ public class VisualizationTest implements Experiment {
 
         generator.generateGraph(network);
 
-        Spreadable spreadable = new ThresholdSpreadable(0.4f, 0.2f, new RandomEntitySelector(1));
         World world = new World(network, spreadable);
 
-        world.RegisterSetupTransformer(new RandomInfector(0.3));
+        world.RegisterSetupTransformer(new RandomInfector(spreadable, 0.3));
 
         logger.info("Created world");
 

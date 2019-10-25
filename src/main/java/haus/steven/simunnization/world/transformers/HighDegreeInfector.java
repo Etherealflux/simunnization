@@ -2,6 +2,7 @@ package haus.steven.simunnization.world.transformers;
 
 
 import haus.steven.simunnization.actors.Entity;
+import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import org.jgrapht.Graph;
@@ -15,9 +16,12 @@ import java.util.List;
  * Infects nodes in order of decreasing degree
  */
 public class HighDegreeInfector implements Transformer {
+    private final Spreadable spreadable;
     private final int count;
 
-    public HighDegreeInfector(int count) {
+    public HighDegreeInfector(Spreadable spreadable, int count) {
+
+        this.spreadable = spreadable;
         this.count = count;
     }
 
@@ -28,7 +32,7 @@ public class HighDegreeInfector implements Transformer {
         List<Entity> entities = new ArrayList<>(network.vertexSet());
         entities.sort(comparator);
 
-        entities.stream().limit(count).forEach(o -> o.infect(1));
+        entities.stream().limit(count).forEach(o -> o.infect(spreadable, 1));
     }
 
     @Override

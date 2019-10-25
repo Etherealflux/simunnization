@@ -54,11 +54,11 @@ public class SIRSpreadable implements Spreadable {
         for (Entity target :
                 neighbors) {
             Connection conn = network.getEdge(host, target);
-            target.infect(infectCount(host, target, conn));
+            target.infect(this, infectCount(host, target, conn));
         }
 
-        host.infect(hostInfected);
-        host.recover(hostRecovered);
+        host.infect(this, hostInfected);
+        host.recover(this, hostRecovered);
     }
 
     private int infectCount(Entity source, Entity target) {
