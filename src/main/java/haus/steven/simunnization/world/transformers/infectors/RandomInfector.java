@@ -1,9 +1,10 @@
-package haus.steven.simunnization.world.transformers;
+package haus.steven.simunnization.world.transformers.infectors;
 
 import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
+import haus.steven.simunnization.world.transformers.Transformer;
 import org.jgrapht.Graph;
 
 public class RandomInfector implements Transformer {

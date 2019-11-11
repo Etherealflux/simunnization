@@ -9,7 +9,7 @@ import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import haus.steven.simunnization.world.connections.suppliers.ToggleConnectionSupplier;
 import haus.steven.simunnization.world.statistics.InfectionLogger;
-import haus.steven.simunnization.world.transformers.RandomInfector;
+import haus.steven.simunnization.world.transformers.infectors.RandomInfector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jgrapht.Graph;

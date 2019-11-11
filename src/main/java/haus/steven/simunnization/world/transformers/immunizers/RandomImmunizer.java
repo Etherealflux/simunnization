@@ -1,8 +1,9 @@
-package haus.steven.simunnization.world.transformers;
+package haus.steven.simunnization.world.transformers.immunizers;
 
 import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
+import haus.steven.simunnization.world.transformers.Transformer;
 import org.jgrapht.Graph;
 
 import java.util.ArrayList;

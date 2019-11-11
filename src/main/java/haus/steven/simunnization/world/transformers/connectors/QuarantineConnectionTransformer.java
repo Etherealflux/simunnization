@@ -1,8 +1,9 @@
-package haus.steven.simunnization.world.transformers;
+package haus.steven.simunnization.world.transformers.connectors;
 
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import haus.steven.simunnization.world.connections.ToggleConnection;
+import haus.steven.simunnization.world.transformers.Transformer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
