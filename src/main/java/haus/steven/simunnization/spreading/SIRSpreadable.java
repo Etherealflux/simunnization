@@ -1,9 +1,9 @@
 package haus.steven.simunnization.spreading;
 
 import haus.steven.simunnization.actors.Entity;
-import haus.steven.simunnization.world.selectors.EntitySelector;
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
+import haus.steven.simunnization.world.selectors.EntitySelector;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 

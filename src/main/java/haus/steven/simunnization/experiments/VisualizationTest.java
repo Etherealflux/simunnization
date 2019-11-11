@@ -7,11 +7,11 @@ import haus.steven.simunnization.actors.suppliers.NumberedIndividualSupplier;
 import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.spreading.State;
 import haus.steven.simunnization.spreading.ThresholdSpreadable;
-import haus.steven.simunnization.world.selectors.RandomEntitySelector;
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import haus.steven.simunnization.world.connections.suppliers.ToggleConnectionSupplier;
-import haus.steven.simunnization.world.transformers.infectors.RandomInfector;
+import haus.steven.simunnization.world.selectors.RandomEntitySelector;
+import haus.steven.simunnization.world.transformers.infectors.SelectorInfector;
 import haus.steven.simunnization.world.visualize.NetworkViewer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,8 +56,8 @@ public class VisualizationTest implements Experiment {
 
         World world = new World(network, spreadables);
 
-        world.RegisterSetupTransformer(new RandomInfector(spreadableA, 0.3));
-        world.RegisterSetupTransformer(new RandomInfector(spreadableB, 0.3));
+        world.RegisterSetupTransformer(new SelectorInfector(new RandomEntitySelector(25), spreadableA));
+        world.RegisterSetupTransformer(new SelectorInfector(new RandomEntitySelector(25), spreadableB));
 
         logger.info("Created world");
 
