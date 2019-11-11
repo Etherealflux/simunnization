@@ -68,4 +68,9 @@ public class ThresholdSpreadable extends Spreadable {
     public String getName() {
         return "Threshold";
     }
+
+    @Override
+    public boolean coexists(Spreadable other) {
+        return this == other;
+    }
 }

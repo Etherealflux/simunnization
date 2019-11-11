@@ -33,8 +33,8 @@ public class VisualizationTest implements Experiment {
 
     @Override
     public void run(Map<String, String> args) {
-        Spreadable spreadableA = new ThresholdSpreadable(0.4f, 0.2f, new RandomEntitySelector(1));
-        Spreadable spreadableB = new ThresholdSpreadable(0.4f, 0.2f, new RandomEntitySelector(1));
+        Spreadable spreadableA = new ThresholdSpreadable(0.4f, 0.0f, new RandomEntitySelector(1));
+        Spreadable spreadableB = new ThresholdSpreadable(0.4f, 0.0f, new RandomEntitySelector(1));
 
         spreadableA.setColor(State.SUSCEPTIBLE, new RGB(250, 250, 250));
         spreadableB.setColor(State.SUSCEPTIBLE, new RGB(250, 250, 250));

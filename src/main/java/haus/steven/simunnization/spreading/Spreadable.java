@@ -32,7 +32,17 @@ public abstract class Spreadable {
     public void setColor(State state, ConvertibleColor color) {
         colors.put(state, color);
     }
+
     public ConvertibleColor colorFor(State state) {
         return colors.get(state);
+    }
+
+    /**
+     * Decides if two spreadables can infect the same singular entity
+     * @param spreadable
+     * @return
+     */
+    public boolean coexists(Spreadable spreadable) {
+        return true;
     }
 }

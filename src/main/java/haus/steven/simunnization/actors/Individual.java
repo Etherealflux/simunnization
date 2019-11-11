@@ -53,6 +53,14 @@ public class Individual implements Entity {
 
         State current = states.get(spreadable);
 
+        if (to == State.INFECTED) {
+            for (Spreadable other : states.keySet()) {
+                if (states.get(other) == State.INFECTED) {
+                    if (!other.coexists(spreadable))
+                        return;
+                }
+            }
+        }
         if (current == from) {
             states.put(spreadable, to);
         }
