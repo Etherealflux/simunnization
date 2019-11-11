@@ -4,7 +4,7 @@ import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.actors.suppliers.NumberedIndividualSupplier;
 import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.spreading.ThresholdSpreadable;
-import haus.steven.simunnization.spreading.selectors.RandomEntitySelector;
+import haus.steven.simunnization.world.selectors.RandomEntitySelector;
 import haus.steven.simunnization.world.World;
 import haus.steven.simunnization.world.connections.Connection;
 import haus.steven.simunnization.world.connections.suppliers.ToggleConnectionSupplier;

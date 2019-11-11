@@ -1,4 +1,4 @@
-package haus.steven.simunnization.spreading.selectors;
+package haus.steven.simunnization.world.selectors;
 
 import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.world.World;
