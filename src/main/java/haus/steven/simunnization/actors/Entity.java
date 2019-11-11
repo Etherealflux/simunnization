@@ -23,7 +23,7 @@ public interface Entity extends Immunizable {
      * Counts the total number of people in a certain state for a given Spreadable. An entity will only ever be
      * in one state per spreadable.
      *
-     * @param state Which state to count
+     * @param state      Which state to count
      * @param spreadable Which spreadable to consider
      * @return The number of entities in that state for the given spreadable
      */
@@ -48,6 +48,7 @@ public interface Entity extends Immunizable {
     /**
      * Try to infect one or more entities with a specific Spreadable. This will not infect more people than are
      * susceptible, and may also be affected by rules for coexistence of spreadables.
+     *
      * @param spreadable
      * @param count
      */

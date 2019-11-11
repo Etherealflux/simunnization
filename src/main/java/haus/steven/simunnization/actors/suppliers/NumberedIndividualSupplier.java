@@ -11,8 +11,8 @@ import java.util.function.Supplier;
  * Generates unique Individuals with an incrementing name
  */
 public class NumberedIndividualSupplier implements Supplier<Entity> {
-    private int count = 0;
     private final Collection<Spreadable> spreadables;
+    private int count = 0;
 
     public NumberedIndividualSupplier(Collection<Spreadable> spreadables) {
         this.spreadables = spreadables;

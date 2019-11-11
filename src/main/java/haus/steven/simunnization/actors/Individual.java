@@ -23,7 +23,7 @@ public class Individual implements Entity {
         this.name = name;
         this.states = new HashMap<>();
 
-        for (Spreadable spreadable: spreadables) {
+        for (Spreadable spreadable : spreadables) {
             states.put(spreadable, State.SUSCEPTIBLE);
         }
         labels = new HashSet<>();

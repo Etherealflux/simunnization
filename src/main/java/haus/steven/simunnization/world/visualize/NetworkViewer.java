@@ -10,7 +10,6 @@ import com.mxgraph.model.mxGeometry;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
-import com.sun.tools.javac.util.Convert;
 import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.spreading.Spreadable;
 import haus.steven.simunnization.spreading.State;
@@ -19,7 +18,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NetworkViewer extends JFrame {
@@ -81,7 +79,7 @@ public class NetworkViewer extends JFrame {
                     logger.info(colors);
 
                     if (colors.size() == 0) {
-                        color = new RGB(0,0,0);
+                        color = new RGB(0, 0, 0);
                     } else {
                         color = mixColors(colors, coefficients).toRGB();
                     }
@@ -95,6 +93,7 @@ public class NetworkViewer extends JFrame {
         }
 
     }
+
     private LAB mixColors(List<ConvertibleColor> colors, List<Double> coefficients) {
         double A = 0;
         double B = 0;

@@ -2,7 +2,6 @@ package haus.steven.simunnization.spreading;
 
 import com.github.ajalt.colormath.ConvertibleColor;
 import com.github.ajalt.colormath.RGB;
-import com.sun.tools.javac.util.Convert;
 import haus.steven.simunnization.world.World;
 
 import java.util.HashMap;
@@ -19,9 +18,10 @@ public abstract class Spreadable {
 
     public Spreadable() {
         colors.put(State.SUSCEPTIBLE, new RGB(0, 255, 0));
-        colors.put(State.INFECTED, new RGB(255, 0,0));
+        colors.put(State.INFECTED, new RGB(255, 0, 0));
         colors.put(State.RECOVERED, new RGB(0, 0, 255));
     }
+
     /**
      * Invoked by the world every tick.
      *
@@ -39,6 +39,7 @@ public abstract class Spreadable {
 
     /**
      * Decides if two spreadables can infect the same singular entity
+     *
      * @param spreadable
      * @return
      */
