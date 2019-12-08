@@ -23,7 +23,7 @@ import java.util.List;
 public class NetworkViewer extends JFrame {
     private static final Logger logger = LogManager.getLogger();
 
-    private final mxGraph graph;
+    public final mxGraph graph;
     private final mxGraphComponent graphComponent;
 
     public NetworkViewer(mxGraph graph) {

@@ -39,7 +39,6 @@ public class ThresholdExperiment implements Experiment {
         World world = new World(network, Arrays.asList(spreadable));
 
         world.RegisterSetupTransformer(new RandomInfector(spreadable, 0.5));
-
         world.RegisterLogger(new InfectionLogger(100));
 
         logger.info("Created world");
