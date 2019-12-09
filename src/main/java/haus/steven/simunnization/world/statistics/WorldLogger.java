@@ -1,6 +1,7 @@
 package haus.steven.simunnization.world.statistics;
 
 import haus.steven.simunnization.world.World;
+import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.internal.chartpart.Chart;
 
@@ -24,5 +25,19 @@ public interface WorldLogger {
                 charts) {
             new SwingWrapper(chart).displayChart();
         }
+    }
+
+    default void save(String fileName) {
+        List<Chart> charts = chart();
+
+        try {
+            for (Chart chart :
+                    charts) {
+                BitmapEncoder.saveBitmapWithDPI(chart, fileName, BitmapEncoder.BitmapFormat.PNG, 150);
+            }
+        } catch (Exception e) {
+            // oh well
+        }
+
     }
 }

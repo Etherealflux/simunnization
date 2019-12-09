@@ -3,39 +3,52 @@ package haus.steven.simunnization.world.selectors;
 import haus.steven.simunnization.actors.Entity;
 import haus.steven.simunnization.world.World;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
- * Selects entities at random, with a weight of (1+k)
+ * Selects entities cyclically, in order of decreasing k
  */
 public class HighDegreeEntitySelector implements EntitySelector {
-    private final Random random = new Random();
+    private List<Entity> entities;
 
-    private NavigableMap<Integer, Entity> degrees;
-    private int totalWeights = 0;
+    private final int count;
+    private int currentIndex = 0;
+
+    public HighDegreeEntitySelector(int count) {
+        this.count = count;
+    }
 
     private void initDegrees(World world) {
-        degrees = new TreeMap<Integer, Entity>();
-        int degreeTotal = 0;
+        entities = new ArrayList<>(world.network.vertexSet());
 
-        for (Entity entity : world.network.vertexSet()) {
-            degreeTotal += 1 + world.network.degreeOf(entity);
-            degrees.put(degreeTotal, entity);
+        entities.sort(new Comparator<Entity>() {
+            @Override
+            public int compare(Entity o1, Entity o2) {
+                return world.network.degreeOf(o2) - world.network.degreeOf(o1);
+            }
+        });
+
+        for (Entity entity: entities) {
+            System.out.println(world.network.degreeOf(entity));
         }
-
-        totalWeights = degreeTotal;
     }
 
     @Override
     public Collection<Entity> select(World world) {
-        if (degrees == null) {
+        if (entities == null) {
             initDegrees(world);
         }
 
-        int index = random.nextInt(totalWeights);
+        ArrayList<Entity> results = new ArrayList<>();
+        for (int i=0; i<count; i++) {
+            results.add(entities.get(currentIndex));
+            currentIndex++;
+            if (currentIndex >= entities.size()) {
+                currentIndex = 0;
+            }
+        }
 
-        Entity chosen = degrees.higherEntry(index).getValue();
-
-        return new ArrayList<>(Arrays.asList(chosen));
+        return results;
     }
 }

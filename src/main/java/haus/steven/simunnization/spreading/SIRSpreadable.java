@@ -13,14 +13,25 @@ import java.util.List;
  * A SIRSpreadable is any Spreadable that follows the standard SIR model
  */
 public class SIRSpreadable extends Spreadable {
+    public enum Mode {
+        SI,
+        SIS,
+        SIR
+    };
     private final double infectionRate;
     private final double recoveryRate;
     private final EntitySelector selector;
+    private final Mode mode;
 
     public SIRSpreadable(double infectionRate, double recoveryRate, EntitySelector selector) {
+        this(infectionRate, recoveryRate, selector, Mode.SIR);
+    }
+
+    public SIRSpreadable(double infectionRate, double recoveryRate, EntitySelector selector, SIRSpreadable.Mode mode) {
         this.infectionRate = infectionRate;
         this.recoveryRate = recoveryRate;
         this.selector = selector;
+        this.mode = mode;
     }
 
     /**
@@ -32,9 +43,9 @@ public class SIRSpreadable extends Spreadable {
     private int roundRandom(double value) {
         double probability = value - Math.floor(value);
         if (Math.random() < probability) {
-            return (int) Math.floor(value);
-        } else {
             return (int) Math.ceil(value);
+        } else {
+            return (int) Math.floor(value);
         }
     }
 
@@ -58,26 +69,36 @@ public class SIRSpreadable extends Spreadable {
         }
 
         host.infect(this, hostInfected);
-        host.recover(this, hostRecovered);
+        switch(mode) {
+            case SI:
+                break;
+            case SIS:
+                host.suscept(this, hostRecovered);
+                break;
+            case SIR:
+                host.recover(this, hostRecovered);
+                break;
+        }
+
     }
 
     private int infectCount(Entity source, Entity target) {
-        int sourceInfected = source.count(State.INFECTED);
-        int targetSusceptible = target.count(State.SUSCEPTIBLE);
+        int sourceInfected = source.count(State.INFECTED, this);
+        int targetSusceptible = target.count(State.SUSCEPTIBLE, this);
 
         return roundRandom(infectionRateFor(source, target) * sourceInfected * targetSusceptible);
     }
 
 
     private int infectCount(Entity source, Entity target, Connection conn) {
-        int sourceInfected = source.count(State.INFECTED);
-        int targetSusceptible = target.count(State.SUSCEPTIBLE);
+        int sourceInfected = source.count(State.INFECTED, this);
+        int targetSusceptible = target.count(State.SUSCEPTIBLE, this);
 
         return roundRandom(infectionRateFor(source, target, conn) * sourceInfected * targetSusceptible);
     }
 
     private int recoverCount(Entity source) {
-        int sourceInfected = source.count(State.INFECTED);
+        int sourceInfected = source.count(State.INFECTED,  this);
 
         return roundRandom(this.recoveryRate * sourceInfected);
     }

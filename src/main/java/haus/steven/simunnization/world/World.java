@@ -22,7 +22,7 @@ public class World {
     private final Logger logger = LogManager.getLogger();
     private final ArrayList<Transformer> setupTransformers = new ArrayList<>();
     private final ArrayList<Transformer> tickTransformers = new ArrayList<>();
-    private final ArrayList<WorldLogger> loggers = new ArrayList<>();
+    public final ArrayList<WorldLogger> loggers = new ArrayList<>();
     private int tickCount = 0;
 
     public World(Graph<Entity, Connection> network, Collection<Spreadable> spreadables) {

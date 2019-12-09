@@ -32,11 +32,9 @@ public class TalkGraphShapes implements Experiment {
 
     @java.lang.Override
     public void run(Map<String, String> args) {
-        makeGraph(new WheelGraphGenerator<>(25), "graph-wheel.png");
-        makeGraph(new RingGraphGenerator<>(25), "graph-ring.png");
-        makeGraph(new CompleteGraphGenerator<>(15), "graph-complete.png");
-        makeGraph(new HyperCubeGraphGenerator<Entity, Connection>(5), "graph-hypercube.png");
-        makeGraph(new ScaleFreeGraphGenerator<Entity, Connection>(50), "graph-scalefree.png");
+        String prefix = args.get("fig-dir");
+        makeGraph(new RandomRegularGraphGenerator<>(25, 2), prefix + "graph-random.png");
+        makeGraph(new ScaleFreeGraphGenerator<Entity, Connection>(25), prefix + "graph-scalefree.png");
     }
 
     private void makeGraph(GraphGenerator<Entity, Connection, Entity> generator, String fileName) {

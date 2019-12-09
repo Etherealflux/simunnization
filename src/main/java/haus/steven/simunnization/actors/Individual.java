@@ -51,6 +51,9 @@ public class Individual implements Entity {
             return;
         }
 
+        if (count == 0)
+            return;
+
         State current = states.get(spreadable);
 
         if (to == State.INFECTED) {
